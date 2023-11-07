@@ -2,14 +2,14 @@
 Push_swap is a versatile sorting algorithm visualization tool. Designed as part of a programming challenge, it demonstrates the efficiency of different sorting algorithms by visually displaying their operations.
 
 ## Table of Contents
-- [Introduction](##Introduction)
-- [Description](##Description)
-  - [Language](###Language)
-  - [Algorithm](###Algorithm)
-- [Installation](##Installation)
-- [Usage](##Usage)
-  - [Push_swap](##Push_swap)
-  - [Checker](##Checker)
+- [Introduction](https://github.com/fporciel2/7_Push_swap/blob/main/README.md#introduction)
+- [Description](https://github.com/fporciel2/7_Push_swap/blob/main/README.md#description)
+  - [Language](https://github.com/fporciel2/7_Push_swap/blob/main/README.md#language)
+  - [Algorithm](https://github.com/fporciel2/7_Push_swap/blob/main/README.md#algorithm)
+- [Installation](https://github.com/fporciel2/7_Push_swap/blob/main/README.md#installation)
+- [Usage](https://github.com/fporciel2/7_Push_swap/blob/main/README.md#usage)
+  - [Push_swap](https://github.com/fporciel2/7_Push_swap/blob/main/README.md#push_swap)
+  - [Checker](https://github.com/fporciel2/7_Push_swap/blob/main/README.md#checker)
 
 ## Introduction
 
@@ -46,3 +46,28 @@ The main consequence of this approach is that this program cannot properly be co
 It is important to note that the effective time and space complexity of the program is many times greater than the complexity of the algorithm printed by the prgram in the push_swap language, but the latter is hopefully exactly what is effecitvely required in terms of modifications and comparisons.
 For more informations, see directly the comments in the source files.
 
+## Installation
+
+To download the program:
+
+```
+git clone git@github.com:fporciel2/7_Push_swap.git
+```
+
+To build the Push_swap program: 
+
+```
+make
+```
+
+To build the Checker program:
+
+```
+make bonus
+```
+
+## Usage
+
+### Push_swap
+
+### Checker
