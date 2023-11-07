@@ -48,6 +48,8 @@ For more informations, see directly the comments in the source files.
 
 ## Installation
 
+Before you begin, please ensure you have the latest versions of **gcc** C compiler and **gnu make** installed on your system.
+
 To download the program:
 
 ```
@@ -70,4 +72,34 @@ make bonus
 
 ### Push_swap
 
+Push_swap is the program responsible for generating a sequence of instructions to sort a list of numbers.
+
+To use Push_swap, run the following command, passing the list of numbers as arguments:
+
+```
+./push_swap <list_of_numbers>
+```
+For example:
+
+```
+./push_swap 4 2 8 5 1
+```
+Push_swap will output a series of instructions in the standard output, which you can use to sort the input list.
+
 ### Checker
+
+Checker is the program used to verify if a given sequence of instructions correctly sorts the list.
+
+To use Checker, you need to pipe the output from Push_swap into Checker:
+
+```
+./push_swap <list_of_numbers> | ./checker <list_of_numbers>
+```
+
+For example:
+
+```
+./push_swap 4 2 8 5 1 | ./checker 4 2 8 5 1
+```
+
+Checker will then display "OK" if the instructions successfully sort the list, or "KO" if not.
