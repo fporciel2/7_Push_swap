@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/08 15:55:50 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/08 16:29:30 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -47,7 +47,7 @@ BNAME := $(DIR)/checker
 SRCS := $(filter-out %bonus.c, $(wildcard push_swap*.c))
 BSRCS := $(wildcard push_swap*bonus.c)
 OBJS := $(patsubst %.c, %.o, $(SRCS))
-BOBJS := $(patsubst %.c, %.o, $(SRCS))
+BOBJS := $(patsubst %.c, %.o, $(BSRCS))
 PSH := $(DIR)/push_swap.h
 BPSH := $(DIR)/checker.h
 FTH := $(FTDIR)/libft.h
@@ -99,12 +99,13 @@ norm:
 		$(FTDIR)/*.c $(PRINTFDIR)/*.c
 
 clean:
-	rm $(OBJS) $(BOBJS)
-	cd 1_libft && make clean && cd ..
-	cd 2_ft_printf && make clean && cd ..
+	rm $(OBJS)
+	#if [ ! -e $(BOBJS) }; then rm $(BOBJS); fi
+	#cd 1_libft && make clean && cd ..
+	#cd 2_ft_printf && make clean && cd ..
 
 fclean: clean
-	rm $(NAME) $(BNAME) $(FT) $(PRINTF)
+	rm $(NAME) #$(BNAME) $(FT) $(PRINTF)
 
 re: clean fclean all
 

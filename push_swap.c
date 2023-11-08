@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/08 15:56:47 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:22:58 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -40,15 +40,17 @@
 int	main(int argc, char **argv)
 {
 	static t_ps	ps;
+	t_stack		*tmp;
 
 	argv++;
 	argc--;
 	ps_stack_generator(argc, argv, &ps);
 	ft_printf("\n\nTEST THE STACK\n\n");
-	while (ps.a != NULL)
+	tmp = ps.a;
+	while (tmp != NULL)
 	{
-		ft_printf("%d at position %d\n", ps.a->value, ps.a->position);
-		ps.a = ps.a->next;
+		ft_printf("%d at position %d\n", tmp->value, tmp->position);
+		tmp = tmp->next;
 	}
 	ps_success(&ps);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/08 15:20:57 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:10:00 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -48,7 +48,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
-struct
+typedef struct s_op
 {
 	size_t	pb;
 	size_t	pa;
@@ -61,7 +61,7 @@ struct
 	size_t	rra;
 	size_t	rrb;
 	size_t	rrr;
-}			s_op;
+}			t_op;
 
 typedef struct s_ps
 {
