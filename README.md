@@ -40,11 +40,9 @@ In order to effectively sort the stack, the Push_swap program use a language con
 ### Algorithm
 
 The algorithm used to sort the stack is freely inspired by the "Turk Algorithm", invented by [byaliego](https://github.com/byaliego) and enhanced by [beatrizdile](https://github.com/beatrizdile). (See also [this article](https://medium.com/@ayogun/push-swap-c1f5d2d41e97)).
-The algorithm has a linear space complexity of O(n) and always uses an amount of memory regions equal to the input size. No memory expansion is required after the stack's creation.
+The algorithm has a linear space complexity of O(n) and always uses an amount of memory regions equal to the input size. No memory expansion is required after the stack's creation: if the stack B grows, the stack A decreases accordingly, and viceversa.
 The idea from the "Turk Algorithm" is to implement an adaptive algorithm based on a uniform cost model that performs a cost evaluation to choose the right sequence of operations based on the input size and the grade of order of the stack.
-The main consequence of this approach is that this program cannot properly be considered the implementation of a sorting algorithm, but, in accordance with the data structure used, it must be considered the abstract implementation of an hardware scheduler, or an abstract algorithm generator: it generates and executes the algorithm based on the input size and order, trying to maintain a logarithimc time complexity ( O(n log n) ) for every input.
-It is important to note that the effective time and space complexity of the program is many times greater than the complexity of the algorithm printed by the prgram in the push_swap language, but the latter is hopefully exactly what is effecitvely required in terms of modifications and comparisons.
-For more informations, see directly the comments in the source files.
+In this program, I try to build an implementation of the [introsort](https://en.wikipedia.org/wiki/Introsort) algorithm. For more informations, see directly the comments in the source files.
 
 ## Installation
 
