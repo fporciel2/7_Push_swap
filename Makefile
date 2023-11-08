@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/08 12:07:10 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/08 15:55:50 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -96,10 +96,12 @@ $(BSRCS): $(FT) $(PRINTF) $(BSRCS)
 
 norm:
 	norminette $(SRCS) $(BSRCS) $(PSH) $(BPSH) $(FTH) $(PRINTFH) \
-		$(FTDIR)/$(wildcard *.c) $(PRINTFDIR)/$(wildcard *.c)
+		$(FTDIR)/*.c $(PRINTFDIR)/*.c
 
 clean:
-	rm $(OBJS) $(BOBJS) $(FTDIR)/$(wildcard *.o) $(PRINTFDIR)/$(wildcard *.o)
+	rm $(OBJS) $(BOBJS)
+	cd 1_libft && make clean && cd ..
+	cd 2_ft_printf && make clean && cd ..
 
 fclean: clean
 	rm $(NAME) $(BNAME) $(FT) $(PRINTF)

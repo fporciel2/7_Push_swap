@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/08 15:20:57 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/08 13:52:50 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/08 14:33:41 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -35,46 +35,42 @@
 *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "./1_libft/libft.h"
-# include "./2_ft_printf/ft_printf.h"
+#include "push_swap.h"
 
-typedef struct s_stack
+void	ps_clean(t_stack *head)
 {
-	int				value;
-	size_t			position;
-	size_t			correct_position;
-	struct s_stack	*next;
-}					t_stack;
+	t_stack	*tmp;
 
-struct
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+}
+
+void	ps_success(t_ps *ps)
 {
-	size_t	pb;
-	size_t	pa;
-	size_t	sa;
-	size_t	sb;
-	size_t	ss;
-	size_t	ra;
-	size_t	rb;
-	size_t	rr;
-	size_t	rra;
-	size_t	rrb;
-	size_t	rrr;
-}			s_op;
+	if ((ps->a == NULL) && (ps->b == NULL))
+		exit(EXIT_SUCCESS);
+	if (ps->a != NULL)
+		ps_clean(ps->a);
+	if (ps->b != NULL)
+		ps_clean(ps->b);
+	exit(EXIT_SUCCESS);
+}
 
-typedef struct s_ps
+void	ps_error(t_ps *ps)
 {
-	t_stack		*a;
-	t_stack		*b;
-	t_stack		*tmp;
-	size_t		i;
-	struct s_op	*ops;
-}				t_ps;
-
-void	ps_stack_generator(int stacksize, char **argv, t_ps *ps);
-void	ps_error(t_ps *ps);
-void	ps_clean(t_stack *head);
-void	ps_success(t_ps *ps);
-
-#endif
+	if ((ps->a == NULL) && (ps->b == NULL))
+	{
+		write(2, "Error\n", 6);
+		exit(EXIT_FAILURE);
+	}
+	if (ps->a != NULL)
+		ps_clean(ps->a);
+	if (ps->b != NULL)
+		ps_clean(ps->b);
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}

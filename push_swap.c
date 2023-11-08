@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/08 15:20:57 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/08 15:56:47 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -35,46 +35,21 @@
 *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "./1_libft/libft.h"
-# include "./2_ft_printf/ft_printf.h"
+#include "push_swap.h"
 
-typedef struct s_stack
+int	main(int argc, char **argv)
 {
-	int				value;
-	size_t			position;
-	size_t			correct_position;
-	struct s_stack	*next;
-}					t_stack;
+	static t_ps	ps;
 
-struct
-{
-	size_t	pb;
-	size_t	pa;
-	size_t	sa;
-	size_t	sb;
-	size_t	ss;
-	size_t	ra;
-	size_t	rb;
-	size_t	rr;
-	size_t	rra;
-	size_t	rrb;
-	size_t	rrr;
-}			s_op;
-
-typedef struct s_ps
-{
-	t_stack		*a;
-	t_stack		*b;
-	t_stack		*tmp;
-	size_t		i;
-	struct s_op	*ops;
-}				t_ps;
-
-void	ps_stack_generator(int stacksize, char **argv, t_ps *ps);
-void	ps_error(t_ps *ps);
-void	ps_clean(t_stack *head);
-void	ps_success(t_ps *ps);
-
-#endif
+	argv++;
+	argc--;
+	ps_stack_generator(argc, argv, &ps);
+	ft_printf("\n\nTEST THE STACK\n\n");
+	while (ps.a != NULL)
+	{
+		ft_printf("%d at position %d\n", ps.a->value, ps.a->position);
+		ps.a = ps.a->next;
+	}
+	ps_success(&ps);
+	return (1);
+}
