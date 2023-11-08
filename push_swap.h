@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/08 12:00:26 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:07:55 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -18,6 +18,7 @@
 *  sorting process. Push_swap generates a sequence of instructions to sort a
 *  list of numbers, and Checker verifies whether these instructions are valid
 *  and successfully sort the list.
+*  
 *  Copyright (C) 2023  Federico Porciello
 *
 *  This program is free software: you can redistribute it and/or modify
