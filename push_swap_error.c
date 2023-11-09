@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:52:50 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/08 14:33:41 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/09 09:26:33 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -63,14 +63,10 @@ void	ps_success(t_ps *ps)
 void	ps_error(t_ps *ps)
 {
 	if ((ps->a == NULL) && (ps->b == NULL))
-	{
-		write(2, "Error\n", 6);
-		exit(EXIT_FAILURE);
-	}
+		exit(write(2, "Error\n", 6));
 	if (ps->a != NULL)
 		ps_clean(ps->a);
 	if (ps->b != NULL)
 		ps_clean(ps->b);
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
+	exit(write(2, "Error\n", 6));
 }

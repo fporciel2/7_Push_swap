@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/08 16:29:30 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/09 09:54:56 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -35,7 +35,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-.PHONY: all bonus clean fclean re rebonus norm dft ft dprintf printf
+.PHONY: all bonus clean fclean re rebonus norm dft ft dprintf printf \
+	autogit memcheck
 .DEFAULT_GOAL: all
 DIR := $(shell pwd)
 FTDIR := $(DIR)/1_libft
@@ -99,15 +100,31 @@ norm:
 		$(FTDIR)/*.c $(PRINTFDIR)/*.c
 
 clean:
-	rm $(OBJS)
-	#if [ ! -e $(BOBJS) }; then rm $(BOBJS); fi
-	#cd 1_libft && make clean && cd ..
-	#cd 2_ft_printf && make clean && cd ..
+	rm -f $(OBJS)
+	rm -f $(BOBJS)
+	cd 1_libft && make clean && cd ..
+	cd 2_ft_printf && make clean && cd ..
 
 fclean: clean
-	rm $(NAME) #$(BNAME) $(FT) $(PRINTF)
+	rm -f $(NAME) $(BNAME) $(FT) $(PRINTF)
 
 re: clean fclean all
 
 rebonus: clean fclean bonus
+
+autogit: clean fclean
+	rm -rfd 1_libft
+	rm -rfd 2_ft_printf
+	git status
+	git add *
+	git status
+	echo "Please, enter your commit message: "
+	read commit_message; git commit -m "$$commit_message"
+	git status
+	git push
+
+memcheck:
+	echo "Please, enter your input to test:"
+	read input_list; \
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins-=yes --show-error-list=yes -s -v ./push_swap "$$input_list"
 
