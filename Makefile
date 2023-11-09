@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/09 09:54:56 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/09 09:57:36 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -126,5 +126,5 @@ autogit: clean fclean
 memcheck:
 	echo "Please, enter your input to test:"
 	read input_list; \
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins-=yes --show-error-list=yes -s -v ./push_swap "$$input_list"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --show-error-list=yes -s -v ./push_swap "$$input_list"
 
