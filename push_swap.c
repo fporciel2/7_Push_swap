@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/09 12:43:11 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/10 09:57:41 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -67,7 +67,7 @@
  * After the first check, there's no need to access the pointer to the beginning
  * of the program's name, nor to take it into account when considering the
  * number of elements stored by 'argv'. So, the 'argv' pointer is incremented by
- * one arithmetic unit to point the first useful pointer, and 'argc' is
+ * one arithmetic unit to point the first useful pointer, and 'argc''s value is
  * decreased to store the exact value of the number of arguments passed to the
  * program.
  *
@@ -76,7 +76,10 @@
  * occurr, the input is not already sorted and it is correct, changes the 'ps'
  * variable in order to allow the use of a heap-allocated stack data structure,
  * called stack_a, that is implemented as a linked list and has the same order
- * of the input list.
+ * of values of the input list.
+ *
+ * In the end, the 'ps_success' function, that frees memory and stops the
+ * program. push_swap shouldn't return anything. 
  */
 
 int	main(int argc, char **argv)

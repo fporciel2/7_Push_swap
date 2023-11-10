@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/09 10:20:31 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/10 11:46:57 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -102,8 +102,10 @@ norm:
 clean:
 	rm -f $(OBJS)
 	rm -f $(BOBJS)
-	cd 1_libft && make clean && cd ..
-	cd 2_ft_printf && make clean && cd ..
+	if [ -e $(FTDIR) ]; \
+		then cd $(FTDIR) && make clean && cd ..; fi
+	if [ -e $(PRINTFDIR) ]; \
+		then cd $(PRINTFDIR) && make clean && cd ..; fi
 
 fclean: clean
 	rm -f $(NAME) $(BNAME) $(FT) $(PRINTF)
