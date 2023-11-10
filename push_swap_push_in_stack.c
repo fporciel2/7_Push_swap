@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap_push_in_stack.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/10 15:36:46 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/10 14:51:53 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/10 15:58:18 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -34,58 +34,55 @@
 *  You should have received a copy of the GNU General Public License
 *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+/*
+ * The ps_push_in_b and ps_push_in_a functions perform, respectively, the pop
+ * from stack_a and push in stack_b and the pop from stack_b and push in stack_a
+ * operations, as defined by the push_swap language, and print the operation on
+ * the standard output according to its syntax.
+ */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "./1_libft/libft.h"
-# include "./2_ft_printf/ft_printf.h"
+#include "push_swap.h"
 
-typedef struct s_stack
+/*
+ * If no elements are in stack_a, i.e. a NULL pointer has the place of the
+ * pointer to stack_a's head, the operations is ineffective; otherwise, the top
+ * of stack_a is popped from it and pushed to the top of stack_b. 
+ * In both cases, the operation is printed on the standard output and, if
+ * 'write' fails, the program is interrupted using ps_error.
+ */
+void	ps_push_in_b(t_ps *ps)
 {
-	int				value;
-	size_t			position;
-	size_t			correct_position;
-	struct s_stack	*next;
-}					t_stack;
+	t_stack	*tmp;
 
-typedef struct s_op
+	if (ps->a != NULL)
+	{
+		tmp = ps->a;
+		ps->a = ps->a->next;
+		tmp->next = ps->b;
+		ps->b = tmp;
+	}
+	if (write(1, "pa\n", 3) < 0)
+		ps_error(ps);
+}
+
+/*
+ * If no elements are in stack_b, i.e. a NULL pointer has the place of the
+ * pointer to stack_b's head, the operations is ineffective; otherwise, the top
+ * of stack_b is popped from it and pushed to the top of stack_a. 
+ * In both cases, the operation is printed on the standard output and, if
+ * 'write' fails, the program is interrupted using ps_error.
+ */
+void	ps_push_in_a(t_ps *ps)
 {
-	size_t	pb;
-	size_t	pa;
-	size_t	sa;
-	size_t	sb;
-	size_t	ss;
-	size_t	ra;
-	size_t	rb;
-	size_t	rr;
-	size_t	rra;
-	size_t	rrb;
-	size_t	rrr;
-}			t_op;
+	t_stack	*tmp;
 
-typedef struct s_ps
-{
-	t_stack		*a;
-	t_stack		*b;
-	t_stack		*tmp;
-	size_t		i;
-	struct s_op	*ops;
-}				t_ps;
-
-void	ps_stack_generator(char **argv, t_ps *ps);
-void	ps_error(t_ps *ps);
-void	ps_clean(t_stack *head);
-void	ps_success(t_ps *ps);
-void	ps_push_in_a(t_ps *ps);
-void	ps_push_in_b(t_ps *ps);
-void	ps_swap_a(t_ps *ps);
-void	ps_swap_b(t_ps *ps);
-void	ps_swap_s(t_ps *ps);
-void	ps_rotate_a(t_ps *ps);
-void	ps_rotate_b(t_ps *ps);
-void	ps_rotate_r(t_ps *ps);
-void	ps_revrotate_a(t_ps *ps);
-void	ps_revrotate_b(t_ps *ps);
-void	ps_revrotate_r(t_ps *ps);
-
-#endif
+	if (ps->b != NULL)
+	{
+		tmp = ps->b;
+		ps->b = ps->b->next;
+		tmp->next = ps->a;
+		ps->a = tmp;
+	}
+	if (write(1, "pb\n", 3) < 0)
+		ps_error(ps);
+}
