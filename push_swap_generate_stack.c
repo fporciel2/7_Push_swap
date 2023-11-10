@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:40:08 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/08 15:58:32 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:15:52 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,6 +37,29 @@
 
 #include "push_swap.h"
 
+/*
+ * The 'ps_stack_generator' function is meant to parse the input array of
+ * strings pointed to by 'argv' in order to check whether the list of numbers
+ * passed to the program is valid and, if it is, generate the linked list that
+ * represents the stack by changing the 'ps->a' parameter to point its head.
+ * It also uses the 'stacksize' parameter to make it easier.
+ */
+/*
+ * In this function, the analyzed string pointed to by 'str' is an element of
+ * the push_swap input list.
+ * Since numeric values allowed by push_swap are 32-bit integer values, i.e.
+ * they must be >= than -2147483648 and <= than 2147483647, strings using more
+ * than 11 characters cannot represent a valid numeric value: so the function 
+ * returns a value that means that the string is not valid when invalid 
+ * characters are found checking it. Invalid characters are not-digital ones
+ * and, for the first character, not significant positive or negative. '+' and
+ * '-' are also considered invalid characters if they are the only characters in
+ * the string.
+ * The 'len' variable, representing the length of the string, is used to
+ * calculate it, but the function stops iteration on the string also if 'len'
+ * becomes greater than 11, not only if the end of string is reached by the
+ * check.
+ */
 static size_t	ps_strlen(char *str)
 {
 	size_t	len;
@@ -48,7 +71,7 @@ static size_t	ps_strlen(char *str)
 			&& (str[len + 1] == 0)))
 		return (12);
 	len++;
-	while (str[len])
+	while (str[len] && (len < 12))
 	{
 		if ((str[len] < 48) || (str[len] > 57))
 			return (12);
