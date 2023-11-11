@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:02:02 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/10 16:15:16 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:33:16 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -35,8 +35,25 @@
 *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+/*
+ * The functions of the swap - or switch - class implement the swapping move of
+ * the push_swap language and attempt to print them according to the push_swap's
+ * syntax. Basically, the swap move to a stack switches the first element with
+ * the second, i.e. the top with the element <<under>> the top.
+ */
 #include "push_swap.h"
 
+/*
+ * The ps_swap_a function performs the 'sa' operation by switching the first
+ * element of the stack_a with its second element.
+ * It starts by checking, obviously, if the stack_a has at least two elements.
+ * If this is the case, it assigns the address of the second element to a
+ * temporary automatic variable, called 'tmp', and then assigns the address of
+ * its next element (that is the end of list if the stack has only two
+ * elements) to the pointer to the second element; then assigns the address of
+ * the head to the pointer to the new second element, and finally assigns the
+ * address of the new first element to the pointer to the new head.
+ */
 void	ps_swap_a(t_ps *ps)
 {
 	t_stack	*tmp;
@@ -52,6 +69,17 @@ void	ps_swap_a(t_ps *ps)
 		ps_error(ps);
 }
 
+/*
+ * The ps_swap_b function performs the 'sb' operation by switching the first
+ * element of the stack_a with its second element.
+ * It starts by checking, obviously, if the stack_b has at least two elements.
+ * If this is the case, it assigns the address of the second element to a
+ * temporary automatic variable, called 'tmp', and then assigns the address of
+ * its next element (that is the end of list if the stack has only two
+ * elements) to the pointer to the second element; then assigns the address of
+ * the head to the pointer to the new second element, and finally assigns the
+ * address of the new first element to the pointer to the new head.
+ */
 void	ps_swap_b(t_ps *ps)
 {
 	t_stack	*tmp;
@@ -67,6 +95,17 @@ void	ps_swap_b(t_ps *ps)
 		ps_error(ps);
 }
 
+/*
+ * The ps_swap_s function performs the 'ss' operation by switching the first
+ * element of each stack with its second element.
+ * It starts by checking, obviously, if the stack has at least two elements.
+ * If this is the case, it assigns the address of the second element to a
+ * temporary automatic variable, called 'tmp', and then assigns the address of
+ * its next element (that is the end of list if the stack has only two
+ * elements) to the pointer to the second element; then assigns the address of
+ * the head to the pointer to the new second element, and finally assigns the
+ * address of the new first element to the pointer to the new head.
+ */
 void	ps_swap_s(t_ps *ps)
 {
 	t_stack	*tmp;
