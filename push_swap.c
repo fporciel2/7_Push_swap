@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/11 10:26:00 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:03:01 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -99,7 +99,7 @@ int	main(int argc, char **argv)
 		tmp = tmp->next;
 	}
 	ft_printf("\n");
-	ps_rotate_a(&ps);
+	ps_revrotate_a(&ps);
 	tmp = ps.a;
 	while (tmp != NULL)
 	{
@@ -115,7 +115,7 @@ int	main(int argc, char **argv)
 		ft_printf("%d\n", tmp->value);
 		tmp = tmp->next;
 	}
-	ps_rotate_b(&ps);
+	ps_revrotate_b(&ps);
 	ft_printf("\n");
 	tmp = ps.b;
 	while (tmp != NULL)

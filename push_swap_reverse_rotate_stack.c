@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:34:02 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/11 11:56:24 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:26:57 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -35,6 +35,13 @@
 *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+/*
+ * The reverse rotate move's class of functions is meant to implement the
+ * respective three moves: 'rra', 'rrb' and 'rrr', i.e. reverse rotate stack_a,
+ * reverse rotate stack_b and reverse rotate both stack_a and stack_b. So, these
+ * functions execute the move and attempt to print them according to the
+ * push_swap's syntax.
+ */
 #include "push_swap.h"
 
 void	ps_revrotate_a(t_ps *ps)
@@ -67,9 +74,9 @@ void	ps_revrotate_b(t_ps *ps)
 		while (tail->next->next != NULL)
 			tail = tail->next;
 		head = tail->next;
-		head->next = ps->a;
+		head->next = ps->b;
 		tail->next = NULL;
-		ps->a = head;
+		ps->b = head;
 	}
 	if (write(1, "rrb\n", 4) < 0)
 		ps_error(ps);
@@ -96,9 +103,9 @@ void	ps_revrotate_r(t_ps *ps)
 		while (tail->next->next != NULL)
 			tail = tail->next;
 		head = tail->next;
-		head->next = ps->a;
+		head->next = ps->b;
 		tail->next = NULL;
-		ps->a = head;
+		ps->b = head;
 	}
 	if (write(1, "rrr\n", 4) < 0)
 		ps_error(ps);
