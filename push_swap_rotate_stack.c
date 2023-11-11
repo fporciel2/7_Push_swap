@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:01:45 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/11 10:56:53 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:33:11 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -40,7 +40,6 @@
 */
 
 #include "push_swap.h"
-
 /*
  * The 'ra' move's implementation starts by checking if the move is 
  * appliable to the stack by verifying if the stack has at least two elements.
@@ -55,6 +54,7 @@
  * on the standard output, and interrupts the program using ps_error if 'write' 
  * fails.
  */
+
 void	ps_rotate_a(t_ps *ps)
 {
 	t_stack	*tmps;
