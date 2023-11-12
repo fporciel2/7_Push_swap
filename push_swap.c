@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/12 13:45:14 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/12 15:05:53 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -36,6 +36,40 @@
 */
 
 #include "push_swap.h"
+
+/*
+ * The ps_calculate_constant_factor nested block is meant to analyze the stack
+ * and select the right constant factor to set the correct depth limit.
+ * It works by comparing different factors and the different performances
+ * determined by those factors. It passes the main variable to
+ * ps_check_performance, with the constant factor to analyze, in order to
+ * estimate the time complexity of the introsort, at a mathematical level, with
+ * any given constant factor through 500 possibilities.
+ * Then, it returns the best constant factor.
+ */
+static int	ps_calculate_constant_factor(t_ps *ps)
+{
+	int	const_factor;
+	int	best_factor;
+	int	performance;
+	int	best_performance;
+
+	const_factor = 1;
+	best_factor = 1;
+	best_performance = ps_check_performance(const_factor, ps);
+	ps->i = 1;
+	while (ps->i < 500)
+	{
+		const_factor++;
+		performance = ps_check_performance(const_factor, ps);
+		if (performance < best_performance)
+		{
+			best_performance = performance;
+			best_factor = const_factor;
+		}
+	}
+	return (best_factor);
+}
 
 /*
  * The main Push_swap's function starts the program by taking the input list of
@@ -79,9 +113,8 @@
  * of values of the input list.
  *
  * In the end, the 'ps_success' function, that frees memory and stops the
- * program. push_swap shouldn't return anything. 
+ * program. push_swap shouldn't return anything.
  */
-
 int	main(int argc, char **argv)
 {
 	static t_ps	ps;
@@ -95,7 +128,7 @@ int	main(int argc, char **argv)
 	argc--;
 	ps_stack_generator(argv, &ps);
 	ps_check_correct_position(&ps);
-	cf = ps_calculate_constant_factor(argc, ps);
+	cf = ps_calculate_constant_factor(&ps);
 	dl = ps_calculate_depth_limit(argc, cf);
 	ps_introsort(&ps, argc, dl);
 	ps_success(&ps);
