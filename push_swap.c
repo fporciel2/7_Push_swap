@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/12 11:00:42 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/12 12:26:11 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -85,6 +85,7 @@
 int	main(int argc, char **argv)
 {
 	static t_ps	ps;
+	int			dl;
 	t_stack		*tmp;
 
 	if (argc == 1)
@@ -93,7 +94,8 @@ int	main(int argc, char **argv)
 	argc--;
 	ps_stack_generator(argv, &ps);
 	ps_check_correct_position(&ps);
-	ps_introsort(&ps);
+	dl = ps_calculate_depth_limit(argc);
+	ps_introsort(&ps, argc, dl);
 	ps_success(&ps);
 	return (1);
 }

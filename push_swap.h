@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/12 11:01:22 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/12 12:27:40 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -117,6 +117,7 @@ void	ps_revrotate_a(t_ps *ps);
 void	ps_revrotate_b(t_ps *ps);
 void	ps_revrotate_r(t_ps *ps);
 void	ps_check_correct_position(t_ps *ps);
-void	ps_introsort(t_ps *ps);
+int		ps_calculate_depth_limit(int size);
+void	ps_introsort(t_ps *ps, int size, int dl);
 
 #endif
