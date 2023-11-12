@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/10 15:36:46 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/12 09:50:19 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -34,12 +34,29 @@
 *  You should have received a copy of the GNU General Public License
 *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+/*
+ * According to the the push_swap's characteristics, the following header file
+ * is meant to define the instances of its implicit library of functions,
+ * avoiding, thanks to the 'ifndef-endif' block that blocks multiple definitions
+ * and multiple inclusions of the same header, incorrect inclusions by the
+ * program's source files. Here are defined structures and functions used by the
+ * program.
+ * See README.md for more details.
+ */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "./1_libft/libft.h"
 # include "./2_ft_printf/ft_printf.h"
 
+/*
+ * The s_stack structure is the most important, because it is used to define and
+ * implement the stack's type as a linked list that treats each element of the
+ * stack as a node and the end of stack as a null end of list. Each node
+ * contains three variables corresponding, respectively, to the value of the
+ * element, to its position in the input list, and to the position that it
+ * should have if the list is sorted.
+ */
 typedef struct s_stack
 {
 	int				value;
@@ -48,6 +65,12 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
+/*
+ * The s_op structure is meant to take a register of the number of times that
+ * each operation must be executed in a certain phase of the program's run.
+ * Values must be registered by increasing during analysis of complexity, and
+ * decreased during execution of operations.
+ */
 typedef struct s_op
 {
 	size_t	pb;
@@ -63,13 +86,19 @@ typedef struct s_op
 	size_t	rrr;
 }			t_op;
 
+/*
+ * The main structure s_ps is meant to point the head of both the stacks, to
+ * perform auxiliary and cross-functional operations, to take control over
+ * analysis and execution of instructions. Generally, it is used to link all the
+ * fields of memory used by the program.
+ */
 typedef struct s_ps
 {
 	t_stack		*a;
 	t_stack		*b;
 	t_stack		*tmp;
 	size_t		i;
-	struct s_op	*ops;
+	struct s_op	ops;
 }				t_ps;
 
 void	ps_stack_generator(char **argv, t_ps *ps);
@@ -87,5 +116,6 @@ void	ps_rotate_r(t_ps *ps);
 void	ps_revrotate_a(t_ps *ps);
 void	ps_revrotate_b(t_ps *ps);
 void	ps_revrotate_r(t_ps *ps);
+void	ps_check_correct_position(t_ps *ps);
 
 #endif

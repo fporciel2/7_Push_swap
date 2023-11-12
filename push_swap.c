@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/11 12:03:01 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/12 09:37:00 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -92,38 +92,7 @@ int	main(int argc, char **argv)
 	argv++;
 	argc--;
 	ps_stack_generator(argv, &ps);
-	tmp = ps.a;
-	while (tmp != NULL)
-	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
-	ft_printf("\n");
-	ps_revrotate_a(&ps);
-	tmp = ps.a;
-	while (tmp != NULL)
-	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
-	ft_printf("\n");
-	ps_push_in_b(&ps);
-	ps_push_in_b(&ps);
-	tmp = ps.b;
-	while (tmp != NULL)
-	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
-	ps_revrotate_b(&ps);
-	ft_printf("\n");
-	tmp = ps.b;
-	while (tmp != NULL)
-	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
-	ft_printf("\n");
+	ps_check_correct_position(&ps);
 	ps_success(&ps);
 	return (1);
 }
