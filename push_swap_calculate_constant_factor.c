@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_calculate_depth_limit.c                  :+:      :+:    :+:   */
+/*   push_swap_calculate_constant_factor.c              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 12:28:03 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/12 13:39:00 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/12 13:45:43 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/12 13:47:14 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,8 +37,6 @@
 
 #include "push_swap.h"
 
-int	ps_calculate_depth_limit(int size)
+int	ps_calculate_constant_factor(int argc, t_ps *ps)
 {
-	(void)size;
-	return (0);
 }

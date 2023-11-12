@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 11:05:38 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/12 12:24:42 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:40:09 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,7 +37,7 @@
 
 #include "push_swap.h"
 
-void	ps_introsort(t_ps *ps)
+void	ps_introsort(t_ps *ps, int size, int dl)
 {
 	(void)ps;
 	return ;
