@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:34:02 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/11 12:26:57 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/12 10:07:48 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -44,6 +44,21 @@
  */
 #include "push_swap.h"
 
+/*
+ * The ps_reverse_rotate_a function is meant to put the down of the stack_a to
+ * the top.
+ * It checks whether the stack has at least two elements, avoiding illegal
+ * memory accesses: if it have them, it performs the operation; in any case, it
+ * tries to print the syntactically correct name of operation to the standard
+ * output, and stops the program using ps_error if 'write' fails.
+ * The operation is performed by using the 'tail' pointer to point the bottom of
+ * the stack sliding the list from the head to the penultimate element and using
+ * a temporary 'head' pointer to point the last element, then by assigning the
+ * address of the top of the stack to the pointer to the last element's next
+ * element, then by assigning the address of the end of list to the pointer to
+ * the penultimate element's next element, and finally by assigning the address
+ * to the new head to the pointer to the head of the list.
+ */
 void	ps_revrotate_a(t_ps *ps)
 {
 	t_stack	*head;
@@ -63,6 +78,21 @@ void	ps_revrotate_a(t_ps *ps)
 		ps_error(ps);
 }
 
+/*
+ * The ps_reverse_rotate_b function is meant to put the down of the stack_b to
+ * the top.
+ * It checks whether the stack has at least two elements, avoiding illegal
+ * memory accesses: if it have them, it performs the operation; in any case, it
+ * tries to print the syntactically correct name of operation to the standard
+ * output, and stops the program using ps_error if 'write' fails.
+ * The operation is performed by using the 'tail' pointer to point the bottom of
+ * the stack sliding the list from the head to the penultimate element and using
+ * a temporary 'head' pointer to point the last element, then by assigning the
+ * address of the top of the stack to the pointer to the last element's next
+ * element, then by assigning the address of the end of list to the pointer to
+ * the penultimate element's next element, and finally by assigning the address
+ * to the new head to the pointer to the head of the list.
+ */
 void	ps_revrotate_b(t_ps *ps)
 {
 	t_stack	*head;
@@ -82,6 +112,22 @@ void	ps_revrotate_b(t_ps *ps)
 		ps_error(ps);
 }
 
+/*
+ * The ps_reverse_rotate_r function is meant to put the down of both the stacks 
+ * to the respective top.
+ * It does it, for each stack, as follows.
+ * It checks whether the stack has at least two elements, avoiding illegal
+ * memory accesses: if it have them, it performs the operation.
+ * The operation is performed by using the 'tail' pointer to point the bottom of
+ * the stack sliding the list from the head to the penultimate element and using
+ * a temporary 'head' pointer to point the last element, then by assigning the
+ * address of the top of the stack to the pointer to the last element's next
+ * element, then by assigning the address of the end of list to the pointer to
+ * the penultimate element's next element, and finally by assigning the address
+ * to the new head to the pointer to the head of the list. In any case, the
+ * function tries to print the syntactically correct name of operation to the 
+ * standard output, and stops the program using ps_error if 'write' fails.
+ */
 void	ps_revrotate_r(t_ps *ps)
 {
 	t_stack	*head;
