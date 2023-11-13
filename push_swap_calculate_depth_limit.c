@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 12:28:03 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/12 15:29:30 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:58:50 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,17 +37,41 @@
 
 #include "push_swap.h"
 
+static int	ps_floor_log(int size, int l)
+{
+	if (n >= 1<<4)
+	{
+		n >>= 4;
+		l += 4;
+	}
+	if (n >= 1<<2)
+	{
+		n >>= 2;
+		l += 2;
+	}
+	if (n >= 1<<1)
+		l += 1;
+	if (n == 0)
+		return (-1);
+	return (l);
+}
+
 static int	ps_log(int size)
 {
-	int	result;
+	int	l;
 
-	result = 0;
-	while (size >= 10)
+	l = 0;
+	if (size >= 1<<16)
 	{
-		x /= 10;
-		result++;
+		n >>= 16;
+		l += 16;
 	}
-	return (result);
+	if (n >= 1<<8)
+	{
+		n >>= 8;
+		l += 8;
+	}
+	return (ps_floor_log(size, l));
 }
 
 int	ps_calculate_depth_limit(int size, int cf)
