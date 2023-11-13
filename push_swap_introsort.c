@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 11:05:38 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/12 13:40:09 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/13 16:10:57 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -39,6 +39,15 @@
 
 void	ps_introsort(t_ps *ps, int size, int dl)
 {
-	(void)ps;
-	return ;
+	int	part;
+
+	if (size <= 16)
+		ps_insertionsort();
+	else if (dl == 0)
+		ps_heapsort();
+	else
+	{
+		part = ps_partition(ps, part);
+		ps_introsort(ps, part, (dl - 1));
+	}
 }
