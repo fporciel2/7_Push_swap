@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 12:28:03 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/13 09:58:50 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/13 10:32:47 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -35,6 +35,13 @@
 *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+/*
+ * The ps_calculate_depth_limit is meant to calculate the depth limit for the
+ * Introsort algorithm. The depth limit is the product between the constant
+ * factor and the floored 2-based logarithm of the input size, and allows,
+ * according to empirical researches, to give a limit to the execution of
+ * Quicksort and switch to Heapsort at the correct moment.
+ */
 #include "push_swap.h"
 
 static int	ps_floor_log(int size, int l)
@@ -51,8 +58,6 @@ static int	ps_floor_log(int size, int l)
 	}
 	if (n >= 1<<1)
 		l += 1;
-	if (n == 0)
-		return (-1);
 	return (l);
 }
 
