@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/13 09:59:40 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:12:27 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -68,7 +68,7 @@ static int	ps_calculate_constant_factor(t_ps *ps)
 			best_factor = const_factor;
 		}
 	}
-	return (best_factor);
+	return (best_factor + 1);
 }
 
 /*
@@ -130,8 +130,6 @@ int	main(int argc, char **argv)
 	ps_check_correct_position(&ps);
 	cf = ps_calculate_constant_factor(&ps);
 	dl = ps_calculate_depth_limit(argc, cf);
-	if (dl < 0)
-		ps_error(&ps);
 	ps_introsort(&ps, argc, dl);
 	ps_success(&ps);
 	return (1);
