@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 12:28:03 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/13 10:32:47 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/13 10:53:35 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -44,6 +44,15 @@
  */
 #include "push_swap.h"
 
+/*
+ * ps_floor_log continues the work of ps_log (see below). It calculates the
+ * floor of the base-2 logarithm of the input size. It takes as parameters the
+ * current status of bitwise analysis of the input size and the current status
+ * of the calculation of the logarithm. The function checks if 'size' is greater
+ * than or equal to powers of 2 (4, 2, 1), and if it is, it right shifts 'size'
+ * by the corresponding power of 2 and increments 'l' by that power. The
+ * function then returns 'l'.
+ */
 static int	ps_floor_log(int size, int l)
 {
 	if (n >= 1<<4)
@@ -61,6 +70,13 @@ static int	ps_floor_log(int size, int l)
 	return (l);
 }
 
+/*
+ * ps_log starts calculating the floor of the base-2 logarithm of the input
+ * size, by executing the first two steps of checking if the input size is
+ * greater than some powers of 2 (16, 8) and then shifting 'size' by the
+ * corresponding power of 2 and incrementing 'l' by that power.
+ * The function returns the current status of 'size' and 'l'.
+ */
 static int	ps_log(int size)
 {
 	int	l;
@@ -79,6 +95,12 @@ static int	ps_log(int size)
 	return (ps_floor_log(size, l));
 }
 
+/*
+ * The ps_calculate_depth_limit calculates the depth limit based on 'size' and
+ * on the coefficient 'cf', that represent, respectively, the input size of
+ * push_swap and the experimental constant factor. It does this by multiplying
+ * the constant factor by the floored logarithm of the size.
+ */
 int	ps_calculate_depth_limit(int size, int cf)
 {
 	return (cf * ps_log(size));
