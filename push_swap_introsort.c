@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 11:05:38 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/14 15:11:51 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:19:02 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -76,7 +76,7 @@ static int	ps_partition_b(t_ps *ps, int size)
 			ps_push_in_a(ps);
 		else
 			ps_rotate_b(ps);
-		ps_adjust_stacks(ps);
+		ps_adjust_stacks(ps, pivot);
 		size--;
 	}
 	size = 0;
@@ -118,7 +118,7 @@ static int	ps_partition_a(t_ps *ps, int size)
 			ps_push_in_b(ps);
 		else
 			ps_rotate_a(ps);
-		ps_adjust_stacks(ps);
+		ps_adjust_stacks(ps, pivot);
 		size--;
 	}
 	size = 0;
