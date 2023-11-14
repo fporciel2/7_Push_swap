@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/13 11:12:27 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:50:06 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -47,6 +47,7 @@
  * any given constant factor through 500 possibilities.
  * Then, it returns the best constant factor.
  */
+/*
 static int	ps_calculate_constant_factor(t_ps *ps)
 {
 	int	const_factor;
@@ -69,6 +70,11 @@ static int	ps_calculate_constant_factor(t_ps *ps)
 		}
 	}
 	return (best_factor + 1);
+}*/
+static int	ps_calculate_constant_factor(t_ps *ps)
+{
+	(void)ps;
+	return (2);
 }
 
 /*
@@ -130,7 +136,7 @@ int	main(int argc, char **argv)
 	ps_check_correct_position(&ps);
 	cf = ps_calculate_constant_factor(&ps);
 	dl = ps_calculate_depth_limit(argc, cf);
-	ps_introsort(&ps, argc, dl);
+	ps_introsort(&ps, argc, dl, 0);
 	ps_success(&ps);
 	return (1);
 }

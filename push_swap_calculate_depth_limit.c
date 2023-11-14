@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 12:28:03 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/13 10:53:35 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:52:50 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -55,17 +55,17 @@
  */
 static int	ps_floor_log(int size, int l)
 {
-	if (n >= 1<<4)
+	if (n >= (1 << 4))
 	{
 		n >>= 4;
 		l += 4;
 	}
-	if (n >= 1<<2)
+	if (n >= (1 << 2))
 	{
 		n >>= 2;
 		l += 2;
 	}
-	if (n >= 1<<1)
+	if (n >= (1 << 1))
 		l += 1;
 	return (l);
 }
@@ -82,12 +82,12 @@ static int	ps_log(int size)
 	int	l;
 
 	l = 0;
-	if (size >= 1<<16)
+	if (size >= (1 << 16))
 	{
 		n >>= 16;
 		l += 16;
 	}
-	if (n >= 1<<8)
+	if (n >= (1 << 8))
 	{
 		n >>= 8;
 		l += 8;
