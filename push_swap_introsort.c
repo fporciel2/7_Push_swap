@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 11:05:38 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/14 11:37:47 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:11:51 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -47,13 +47,87 @@
  */
 #include "push_swap.h"
 
-static int	ps_partition_a(ps)
+/*
+ * The ps_partition_b function is meant to apply the QuickSort's recursion to
+ * the minor part of the stack to sort, so that the this partition can be
+ * subpartitioned.
+ * It takes the main pointer and the size of the current partition. Then, it
+ * uses two variables, an integer and a pointer, to store respectively a pivot
+ * value chase by parsing the stack with the ps_median_of_three function, and
+ * the address of the head of the list representing the minor stack's partition.
+ * Then, it slides all the partition and pushes in the other partition the
+ * elements greater than the pivot, and at the bottom of the partition the
+ * elements that are smaller. It uses also the ps_adjust_stacks utility to
+ * micro-sort the elements in the stack.
+ * Then, it calculates and returns the partition's size by increasing the value
+ * of the variable used to store the partition's size at each node reached by
+ * sliding the partition.
+ */
+static int	ps_partition_b(t_ps *ps, int size)
+{
+	int		pivot;
+	t_stack	*tmp;
+
+	pivot = ps_median_of_three(ps->b);
+	tmp = ps->b;
+	while (size > 0)
+	{
+		if (tmp->value > pivot)
+			ps_push_in_a(ps);
+		else
+			ps_rotate_b(ps);
+		ps_adjust_stacks(ps);
+		size--;
+	}
+	size = 0;
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+		size++;
+	}
+	return (size);
+}
+
+/*
+ * The ps_partition_a function is meant to apply the QuickSort's recursion to
+ * the greater part of the stack to sort, so that the this partition can be
+ * subpartitioned.
+ * It takes the main pointer and the size of the current partition. Then, it
+ * uses two variables, an integer and a pointer, to store respectively a pivot
+ * value chase by parsing the stack with the ps_median_of_three function, and
+ * the address of the head of the list representing the bigger stack's 
+ * partition.
+ * Then, it slides all the partition and pushes in the other partition the
+ * elements smaller than the pivot, and at the bottom of the partition the
+ * elements that are greater. It uses also the ps_adjust_stacks utility to
+ * micro-sort the elements in the stack.
+ * Then, it calculates and returns the partition's size by increasing the value
+ * of the variable used to store the partition's size at each node reached by
+ * sliding the partition.
+ */
+static int	ps_partition_a(t_ps *ps, int size)
 {
 	int		pivot;
 	t_stack	*tmp;
 
 	pivot = ps_median_of_three(ps->a);
-	tmp = 
+	tmp = ps->a;
+	while (size > 0)
+	{
+		if (tmp->value <= pivot)
+			ps_push_in_b(ps);
+		else
+			ps_rotate_a(ps);
+		ps_adjust_stacks(ps);
+		size--;
+	}
+	size = 0;
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+		size++;
+	}
+	return (size);
 }
 
 /*
@@ -96,9 +170,9 @@ void	ps_introsort(t_ps *ps, int size, int dl, int param)
 	else
 	{
 		if (param == 0)
-			part_a = ps_partition_a(ps);
+			part_a = ps_partition_a(ps, size);
 		else
-			part_b = ps_partition_b(ps);
+			part_b = ps_partition_b(ps, size);
 		ps_introsort(ps, part_a, (dl - 1), 0);
 		ps_introsort(ps, part_b, (dl - 1), 1);
 	}
