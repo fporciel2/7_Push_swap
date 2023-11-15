@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:26:28 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 13:08:44 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:14:16 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -39,14 +39,14 @@
 
 static void	ps_push_min(t_ps *ps)
 {
-	if (ps_ismin(ps, ps->a->value))
+	if (ps_ismin(ps->a, ps->a->value))
 		ps_push_in_b(ps);
-	else if (ps_ismin(ps, ps->a->next->value))
+	else if (ps_ismin(ps->a, ps->a->next->value))
 	{
 		ps_rotate_a(ps);
 		ps_push_in_b(ps);
 	}
-	else if (ps_ismin(ps, ps->a->next->next->value))
+	else if (ps_ismin(ps->a, ps->a->next->next->value))
 	{
 		ps_rotate_a(ps);
 		ps_rotate_a(ps);
