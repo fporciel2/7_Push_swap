@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:48:20 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 12:59:14 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:07:28 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,7 +37,28 @@
 
 #include "push_swap.h"
 
+static void	ps_continue_sort_three(t_ps *ps)
+{
+	if (ps_ismin(ps, ps->a->value) && ps_ismax(ps, ps->a->next->value))
+	{
+		ps_swap_a(ps);
+		ps_rotate_a(ps);
+	}
+	else
+		ps_revrotate_a(ps);
+}
+
 void	ps_sort_three(t_ps *ps)
 {
-	if (ps_ismin(ps->a->next->value) && ps_ismax(
+	if (ps_ismin(ps, ps->a->next->value) && ps_ismax(ps, ps->a->next->next->value))
+		ps_swap_a(ps);
+	else if (ps_ismax(ps, ps->a->value) && ps_ismin(ps, ps->a->next->next->value))
+	{
+		ps_swap_a(ps);
+		ps_revrotate_a(ps);
+	}
+	else if (ps_ismax(ps, ps->a->value) && ps_ismin(ps, ps->a->next->value))
+		ps_rotate_a(ps);
+	else
+		ps_continue_sort_three(ps);
 }
