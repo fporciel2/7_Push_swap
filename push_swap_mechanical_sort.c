@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:20:55 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 13:20:36 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:02:37 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,8 +37,44 @@
 
 #include "push_swap.h"
 
+static int	ps_stacksize_a(t_ps *ps)
+{
+	t_stack	*address;
+
+	ps->i = 0;
+	address = ps->a;
+	ps->tmp = address;
+	ps->index = ps->i;
+	while (address != NULL)
+	{
+		if (address->value < ps->tmp->value)
+		{
+			ps->tmp = address;
+			ps->index = ps->i;
+		}
+		address = address->next;
+		(ps->i)++;
+	}
+	return (ps->i);
+}
+
 void	ps_mechanical_sort(t_ps *ps)
 {
-	(void)ps;
-	return ;
+	int	prox;
+
+	while (ps_stacksize_a(ps) > 3)
+	{
+		prox = ps->i / 2;
+		while (ps->a != ps->tmp)
+		{
+			if (prox > ps->index)
+				ps_rotate_a(ps);
+			else
+				ps_revrotate_a(ps);
+		}
+		ps_push_in_b(ps);
+	}
+	ps_microsort(ps);
+	while (ps->b != NULL)
+		ps_push_in_a(ps);
 }
