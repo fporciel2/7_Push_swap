@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_mechanical_sort.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 12:27:11 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/15 12:20:55 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/15 12:21:50 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,20 +37,4 @@
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
-{
-	static t_ps	ps;
 
-	if (argc == 1)
-		ps_error(&ps);
-	argv++;
-	argc--;
-	ps_stack_generator(argv, &ps);
-	ps_check_correct_position(&ps);
-	ps.i = argc;
-	if (ps.i <= 4)
-		ps_microsort(&ps);
-	ps_mechanical_sort(&ps);
-	ps_success(&ps);
-	return (1);
-}

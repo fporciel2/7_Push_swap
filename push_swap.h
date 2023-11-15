@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 11:11:29 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:41:03 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -117,5 +117,10 @@ void	ps_revrotate_a(t_ps *ps);
 void	ps_revrotate_b(t_ps *ps);
 void	ps_revrotate_r(t_ps *ps);
 void	ps_check_correct_position(t_ps *ps);
+void	ps_mechanical_sort(t_ps *ps);
+void	ps_microsort(t_ps *ps);
+int		ps_ismax(t_stack *head, int value);
+int		ps_ismin(t_stacl *head, int value);
+void	ps_sort_three(t_ps *ps);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_microsort.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 12:27:11 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/15 12:26:28 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/15 13:00:00 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,20 +37,61 @@
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+static void	ps_push_min(t_ps *ps)
 {
-	static t_ps	ps;
+	if (ps_ismin(ps, ps->a->value))
+		ps_push_in_b(ps);
+	else if (ps_ismin(ps, ps->a->next->value))
+	{
+		ps_rotate_a(ps);
+		ps_push_in_b(ps);
+	}
+	else if (ps_ismin(ps, ps->a->next->next->value))
+	{
+		ps_rotate_a(ps);
+		ps_rotate_a(ps);
+		ps_push_in_b(ps);
+	}
+	else
+	{
+		ps_revrotate_a(ps);
+		ps_push_in_b(ps);
+	}
+}
 
-	if (argc == 1)
-		ps_error(&ps);
-	argv++;
-	argc--;
-	ps_stack_generator(argv, &ps);
-	ps_check_correct_position(&ps);
-	ps.i = argc;
-	if (ps.i <= 4)
-		ps_microsort(&ps);
-	ps_mechanical_sort(&ps);
-	ps_success(&ps);
+int	ps_ismax(t_stack *head, int value)
+{
+	while (head != NULL)
+	{
+		if (head->value > value)
+			return (0);
+		head = head->next;
+	}
 	return (1);
+}
+
+int	ps_ismin(t_stack *head, int value)
+{
+	while (head != NULL)
+	{
+		if (head->value < value)
+			return (0);
+		head = head->next;
+	}
+	return (1);
+}
+
+void	ps_microsort(t_ps *ps)
+{
+	if (ps->i == 2)
+		ps_swap_a(ps);
+	else if (ps->i == 3)
+		ps_sort_three(ps);
+	else
+	{
+		ps_push_min(ps);
+		ps_sort_three(ps);
+		ps_push_in_a(ps);
+	}
+	ps_success(ps);
 }
