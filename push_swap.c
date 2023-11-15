@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 13:08:14 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:29:18 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -40,6 +40,7 @@
 int	main(int argc, char **argv)
 {
 	static t_ps	ps;
+	t_stack		*tmp;
 
 	if (argc == 1)
 		ps_error(&ps);
@@ -47,13 +48,25 @@ int	main(int argc, char **argv)
 	argc--;
 	ps_stack_generator(argv, &ps);
 	ps_check_correct_position(&ps);
+	tmp = ps.a;
+	ft_printf("\n");
+	while (tmp != NULL)
+	{
+		ft_printf("%d\n", tmp->value);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
 	ps.i = argc;
 	if (ps.i <= 4)
-	{
 		ps_microsort(&ps);
-		ps_success(&ps);
-	}
 	ps_mechanical_sort(&ps);
+	ft_printf("\n");
+	while (tmp != NULL)
+	{
+		ft_printf("%d\n", tmp->value);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
 	ps_success(&ps);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:20:55 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 12:21:50 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:20:36 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,4 +37,8 @@
 
 #include "push_swap.h"
 
-
+void	ps_mechanical_sort(t_ps *ps)
+{
+	(void)ps;
+	return ;
+}

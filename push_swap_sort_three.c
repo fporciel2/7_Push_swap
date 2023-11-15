@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:48:20 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 13:15:26 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:18:35 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -40,7 +40,7 @@
 static void	ps_continue_sort_three(t_ps *ps)
 {
 	if (ps_ismin(ps->a, ps->a->value)
-			&& ps_ismax(ps->a, ps->a->next->value))
+		&& ps_ismax(ps->a, ps->a->next->value))
 	{
 		ps_swap_a(ps);
 		ps_rotate_a(ps);
@@ -52,16 +52,16 @@ static void	ps_continue_sort_three(t_ps *ps)
 void	ps_sort_three(t_ps *ps)
 {
 	if (ps_ismin(ps->a, ps->a->next->value)
-			&& ps_ismax(ps->a, ps->a->next->next->value))
+		&& ps_ismax(ps->a, ps->a->next->next->value))
 		ps_swap_a(ps);
 	else if (ps_ismax(ps->a, ps->a->value)
-			&& ps_ismin(ps->a, ps->a->next->next->value))
+		&& ps_ismin(ps->a, ps->a->next->next->value))
 	{
 		ps_swap_a(ps);
 		ps_revrotate_a(ps);
 	}
 	else if (ps_ismax(ps->a, ps->a->value)
-			&& ps_ismin(ps->a, ps->a->next->value))
+		&& ps_ismin(ps->a, ps->a->next->value))
 		ps_rotate_a(ps);
 	else
 		ps_continue_sort_three(ps);
