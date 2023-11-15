@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 13:29:18 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:31:17 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -60,6 +60,7 @@ int	main(int argc, char **argv)
 	if (ps.i <= 4)
 		ps_microsort(&ps);
 	ps_mechanical_sort(&ps);
+	tmp = ps.a;
 	ft_printf("\n");
 	while (tmp != NULL)
 	{
