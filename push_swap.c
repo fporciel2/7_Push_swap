@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 11:08:13 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:42:14 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,12 +37,49 @@
 
 #include "push_swap.h"
 
+static void	ps_continue_sort_three(t_ps *ps)
+{
+	if ((ps->a->correct_position == 0) && (ps->a->next->correct_position == 2)
+			&& (ps->a->next->next->correct_position == 1))
+	{
+		ps_swap_a(ps);
+		ps_rotate_a(ps);
+	}
+	else if ((ps->a->correct_position == 1) && (ps->a->next->correct_position == 2)
+			&& (ps->a->next->next->correct_position == 0))
+		ps_revrotate_a(ps);
+}
+
+static void	ps_sort_three(t_ps *ps)
+{
+	if ((ps->a->correct_position == 1) && (ps->a->next->correct_position == 0)
+			&& (ps->a->next->next->correct_position == 2))
+		ps_swap_a(ps);
+	else if ((ps->a->correct_position == 2) && (ps->a->next->correct_position == 1)
+			&& (ps->a->next->next->correct_position == 0))
+	{
+		ps_swap_a(ps);
+		ps_revrotate_a(ps);
+	}
+	else if ((ps->a->correct_position == 2) && (ps->a->next->correct_position == 0)
+			&& (ps->a->next->next->correct_position == 1))
+		ps_rotate_a(ps);
+	else
+		ps_continue_sort_three(ps);
+}
+
+static void	ps_microsort(t_ps *ps)
+{
+	if (ps->i == 2)
+		ps_swap_a(ps);
+	else
+		ps_sort_three(ps);
+	ps_success(ps);
+}
+
 int	main(int argc, char **argv)
 {
 	static t_ps	ps;
-	int			dl;
-	int			cf;
-	t_stack		*tmp;
 
 	if (argc == 1)
 		ps_error(&ps);
@@ -50,6 +87,9 @@ int	main(int argc, char **argv)
 	argc--;
 	ps_stack_generator(argv, &ps);
 	ps_check_correct_position(&ps);
+	ps.i = argc;
+	if (ps.i < 4)
+		ps_microsort(&ps);
 	ps_success(&ps);
 	return (1);
 }
