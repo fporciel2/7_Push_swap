@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/16 10:36:01 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/16 12:00:18 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/16 12:04:11 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,42 +37,16 @@
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	ps_issorted_k(t_ps *ps)
 {
-	static t_ps	ps;
-	t_stack		*tmp;
+	t_stack	*tmp;
 
-	if (argc == 1)
-		ps_error(&ps);
-	argv++;
-	argc--;
-	ps_stack_generator(argv, &ps);
-	ps_check_correct_position(&ps);
-	tmp = ps.a;
-	ft_printf("\n");
+	tmp = ps->k;
 	while (tmp != NULL)
 	{
-		ft_printf("%d\n", tmp->value);
+		if (tmp->next && (tmp->value > tmp->next->value))
+			return (0);
 		tmp = tmp->next;
 	}
-	ft_printf("\n");
-	ps.i = argc;
-	ps.nummoves = 0;
-	if (ps.i <= 4)
-		ps_microsort(&ps);
-	if (ps.i <= 10)
-		ps_mechanical_sort(&ps);
-	if ((ps.i > 10) && (ps.i <= 100))
-		ps_nonmechanical_sort(&ps);
-	tmp = ps.a;
-	ft_printf("\n");
-	while (tmp != NULL)
-	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
-	ft_printf("\n");
-	ft_printf("\nMoves: %d\n", ps.nummoves);
-	ps_success(&ps);
 	return (1);
 }

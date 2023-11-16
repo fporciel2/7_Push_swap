@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:58:27 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/10 11:43:19 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:11:00 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -87,6 +87,8 @@ void	ps_success(t_ps *ps)
 		ps_clean(ps->a);
 	if (ps->b != NULL)
 		ps_clean(ps->b);
+	if (ps->k != NULL)
+		ps_clean(ps->k);
 	exit(EXIT_SUCCESS);
 }
 
@@ -110,5 +112,7 @@ void	ps_error(t_ps *ps)
 		ps_clean(ps->a);
 	if (ps->b != NULL)
 		ps_clean(ps->b);
+	if (ps->k != NULL)
+		ps_clean(ps->k);
 	exit(write(2, "Error\n", 6));
 }

@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/16 10:14:04 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:05:04 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -96,6 +96,7 @@ typedef struct s_ps
 {
 	t_stack		*a;
 	t_stack		*b;
+	t_stack		*k;
 	t_stack		*tmp;
 	size_t		i;
 	int			index;
@@ -125,5 +126,7 @@ int		ps_ismax(t_stack *head, int value);
 int		ps_ismin(t_stack *head, int value);
 void	ps_sort_three(t_ps *ps);
 int		ps_issorted_a(t_stack *head);
+void	ps_nonmechanical_sort(t_ps *ps);
+int		ps_issorted_k(t_ps *ps);
 
 #endif

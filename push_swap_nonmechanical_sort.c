@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_nonmechanical_sort.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/16 10:36:01 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/16 10:36:04 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/16 12:13:06 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -36,43 +36,83 @@
 */
 
 #include "push_swap.h"
-
-int	main(int argc, char **argv)
+/*
+static void	ps_show_stack_k(t_ps *ps)
 {
-	static t_ps	ps;
-	t_stack		*tmp;
+	t_stack	*tmp;
 
-	if (argc == 1)
-		ps_error(&ps);
-	argv++;
-	argc--;
-	ps_stack_generator(argv, &ps);
-	ps_check_correct_position(&ps);
-	tmp = ps.a;
-	ft_printf("\n");
+	tmp = ps->k;
+	ft_printf("\n\nSTACK K\n\n");
 	while (tmp != NULL)
 	{
-		ft_printf("%d\n", tmp->value);
+		ft_printf("%d is at position %d with correct position %d\n",
+				tmp->value, tmp->position, tmp->correct_position);
 		tmp = tmp->next;
 	}
 	ft_printf("\n");
-	ps.i = argc;
-	ps.nummoves = 0;
-	if (ps.i <= 4)
-		ps_microsort(&ps);
-	if (ps.i <= 10)
-		ps_mechanical_sort(&ps);
-	if ((ps.i > 10) && (ps.i <= 100))
-		ps_nonmechanical_sort(&ps);
-	tmp = ps.a;
-	ft_printf("\n");
-	while (tmp != NULL)
+}*/
+
+static void	ps_sort_stack_k(t_ps *ps)
+{
+	t_stack	*tmp;
+	int		value;
+	int		cp;
+
+	while (!ps_issorted_k(ps))
 	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
+		tmp = ps->k;
+		while (tmp != NULL)
+		{
+			if (tmp->position != tmp->correct_position)
+			{
+				ps->tmp = ps->k;
+				while (ps->tmp->position != tmp->correct_position)
+					ps->tmp = ps->tmp->next;
+				value = tmp->value;
+				cp = tmp->correct_position;
+				tmp->value = ps->tmp->value;
+				tmp->correct_position = ps->tmp->correct_position;
+				ps->tmp->value = value;
+				ps->tmp->correct_position = cp;
+			}
+			tmp = tmp->next;
+		}
 	}
-	ft_printf("\n");
-	ft_printf("\nMoves: %d\n", ps.nummoves);
-	ps_success(&ps);
-	return (1);
 }
+
+static void	ps_continue_nonmechanical_sort(t_ps *ps, t_stack *tmp)
+{
+	while (tmp != NULL)
+	{
+		if (!(ps->tmp->next = (t_stack *)malloc(sizeof(t_stack))))
+			ps_error(ps);
+		ps->tmp->next->value = tmp->value;
+		ps->tmp->next->position = tmp->position;
+		ps->tmp->next->correct_position = tmp->correct_position;
+		ps->tmp->next->next = NULL;
+		ps->tmp = ps->tmp->next;
+		tmp = tmp->next;
+	}
+	ps_sort_stack_k(ps);
+}
+
+void	ps_nonmechanical_sort(t_ps *ps)
+{
+	t_stack	*tmp;
+
+	tmp = ps->a;
+	if (!(ps->k = (t_stack *)malloc(sizeof(t_stack))))
+		ps_error(ps);
+	ps->k->value = tmp->value;
+	ps->k->position = tmp->position;
+	ps->k->correct_position = tmp->correct_position;
+	ps->k->next = NULL;
+	ps->tmp = ps->k;
+	tmp = tmp->next;
+	ps_continue_nonmechanical_sort(ps, tmp);
+}
+/*
+ * Some tests:
+ * ft_printf("\n%d in stack k is at pos. %d and cp. %d, iteration n. %d\n",
+ * ps->tmp->value, ps->tmp->position, ps->tmp->correct_position, ps->i);
+ */
