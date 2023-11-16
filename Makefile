@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/16 10:28:39 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/16 10:32:07 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -72,63 +72,63 @@ $(BNAME): $(FT) $(PRINTF) $(OBJS)
 ft: $(FT)
 
 $(FT): dft
-	if [ ! -e $(FT) ]; \
+	@if [ ! -e $(FT) ]; \
 		then cd $(FTDIR) && make bonus && cd ..; fi
 
 dft:
-	if [ ! -e $(FTDIR) ]; \
+	@if [ ! -e $(FTDIR) ]; \
 		then git clone git@github.com:fporciel2/1_libft; fi
 
 printf: $(PRINTF)
 
 $(PRINTF): dprintf
-	if [ ! -e $(PRINTF) ]; \
+	@if [ ! -e $(PRINTF) ]; \
 		then cd $(PRINTFDIR) && make && cd ..; fi
 
 dprintf:
-	if [ ! -e $(PRINTFDIR) ]; \
+	@if [ ! -e $(PRINTFDIR) ]; \
 		then git clone git@github.com:fporciel2/2_ft_printf; fi
 
 $(OBJS): $(FT) $(PRINTF) $(SRCS)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $(SRCS)
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $(SRCS)
 
 $(BSRCS): $(FT) $(PRINTF) $(BSRCS)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $(BSRCS)
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $(BSRCS)
 
 norm:
-	norminette $(SRCS) $(BSRCS) $(PSH) $(BPSH) $(FTH) $(PRINTFH) \
+	@norminette $(SRCS) $(BSRCS) $(PSH) $(BPSH) $(FTH) $(PRINTFH) \
 		$(FTDIR)/*.c $(PRINTFDIR)/*.c
 
 clean:
-	rm -f $(OBJS)
-	rm -f $(BOBJS)
-	if [ -e $(FTDIR) ]; \
+	@rm -f $(OBJS)
+	@rm -f $(BOBJS)
+	@if [ -e $(FTDIR) ]; \
 		then cd $(FTDIR) && make clean && cd ..; fi
-	if [ -e $(PRINTFDIR) ]; \
+	@if [ -e $(PRINTFDIR) ]; \
 		then cd $(PRINTFDIR) && make clean && cd ..; fi
 
 fclean: clean
-	rm -f $(NAME) $(BNAME) $(FT) $(PRINTF)
+	@rm -f $(NAME) $(BNAME) $(FT) $(PRINTF)
 
 re: clean fclean all
 
 rebonus: clean fclean bonus
 
 dfclean: clean fclean
-	rm -rfd 1_libft
-	rm -rfd 2_ft_printf
+	@rm -rfd 1_libft
+	@rm -rfd 2_ft_printf
 
 autogit: dfclean
-	git status
-	git add *
-	git status
-	echo "Please, enter your commit message: "
-	read commit_message; git commit -m "$$commit_message"
-	git status
-	git push
+	@git status
+	@git add *
+	@git status
+	@echo "\nPlease, enter your commit message:"
+	@read commit_message; git commit -m "$$commit_message"
+	@git status
+	@git push
 
 memcheck:
-	echo "Please, enter your input to test:"
-	read input_list; \
+	@echo "\nPlease, enter your input to test:"
+	@read input_list; \
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --show-error-list=yes -s -v ./push_swap $$input_list
 
