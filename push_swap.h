@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 14:55:34 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:14:04 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -99,6 +99,7 @@ typedef struct s_ps
 	t_stack		*tmp;
 	size_t		i;
 	int			index;
+	int			nummoves;
 	struct s_op	ops;
 }				t_ps;
 

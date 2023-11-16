@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/10 11:46:57 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/16 10:28:39 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -36,7 +36,7 @@
 #
 
 .PHONY: all bonus clean fclean re rebonus norm dft ft dprintf printf \
-	autogit memcheck
+	autogit memcheck dfclean
 .DEFAULT_GOAL: all
 DIR := $(shell pwd)
 FTDIR := $(DIR)/1_libft
@@ -114,9 +114,11 @@ re: clean fclean all
 
 rebonus: clean fclean bonus
 
-autogit: clean fclean
+dfclean: clean fclean
 	rm -rfd 1_libft
 	rm -rfd 2_ft_printf
+
+autogit: dfclean
 	git status
 	git add *
 	git status

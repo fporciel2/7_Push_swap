@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 14:51:53 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/11 10:24:32 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:19:03 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -63,6 +63,7 @@ void	ps_push_in_b(t_ps *ps)
 	}
 	if (write(1, "pb\n", 3) < 0)
 		ps_error(ps);
+	(ps->nummoves)++;
 }
 
 /*
@@ -85,4 +86,5 @@ void	ps_push_in_a(t_ps *ps)
 	}
 	if (write(1, "pa\n", 3) < 0)
 		ps_error(ps);
+	(ps->nummoves)++;
 }

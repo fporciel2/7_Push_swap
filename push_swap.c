@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/15 15:09:37 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:20:09 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -57,10 +57,13 @@ int	main(int argc, char **argv)
 	}
 	ft_printf("\n");
 	ps.i = argc;
+	ps.nummoves = 0;
 	if (ps.i <= 4)
 		ps_microsort(&ps);
 	if (ps.i <= 10)
 		ps_mechanical_sort(&ps);
+	//if ((ps.i > 10) && (ps.i <= 100))
+		//ps_nonmechanical_sort(&ps);
 	tmp = ps.a;
 	ft_printf("\n");
 	while (tmp != NULL)
@@ -69,6 +72,7 @@ int	main(int argc, char **argv)
 		tmp = tmp->next;
 	}
 	ft_printf("\n");
+	ft_printf("\nMoves: %d\n", ps.nummoves);
 	ps_success(&ps);
 	return (1);
 }
