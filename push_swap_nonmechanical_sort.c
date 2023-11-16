@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:36:04 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/16 12:13:06 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:15:28 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -84,7 +84,8 @@ static void	ps_continue_nonmechanical_sort(t_ps *ps, t_stack *tmp)
 {
 	while (tmp != NULL)
 	{
-		if (!(ps->tmp->next = (t_stack *)malloc(sizeof(t_stack))))
+		ps->tmp->next = (t_stack *)malloc(sizeof(t_stack));
+		if (ps->tmp->next == NULL)
 			ps_error(ps);
 		ps->tmp->next->value = tmp->value;
 		ps->tmp->next->position = tmp->position;
@@ -101,7 +102,8 @@ void	ps_nonmechanical_sort(t_ps *ps)
 	t_stack	*tmp;
 
 	tmp = ps->a;
-	if (!(ps->k = (t_stack *)malloc(sizeof(t_stack))))
+	ps->k = (t_stack *)malloc(sizeof(t_stack));
+	if (ps->k == NULL)
 		ps_error(ps);
 	ps->k->value = tmp->value;
 	ps->k->position = tmp->position;
