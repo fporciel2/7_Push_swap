@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:48:49 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 10:40:02 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 10:57:44 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -66,26 +66,25 @@ static void	ps_update_priority(t_ps *ps, int stacksize)
 	t_stack		*tmp;
 	t_stack		*to_prioritize;
 	long long	priority;
-	size_t		count;
 
-	priority = 1;
-	count = 0;
-	ps_flagzero(ps);
+	priority = -1;
 	while (stacksize > 0)
 	{
+		priority++;
 		tmp = ps->a;
+		while (tmp->priority_flag == 1)
+			tmp = tmp->next;
+		if (tmp)
+			to_prioritize = tmp;
 		while (tmp != NULL)
 		{
-			if ((count == 0)
-					|| ((tmp->correct_position > to_prioritize->correct_position)
-						&& (tmp->priority_flag == 0)))
+			if ((tmp->value > to_prioritize->value) && (tmp->priority_flag == 0))
 				to_prioritize = tmp;
 			tmp = tmp->next;
 		}
 		to_prioritize->priority = priority;
 		to_prioritize->priority_flag = 1;
 		stacksize--;
-		priority++;
 	}
 }
 
@@ -111,6 +110,7 @@ void	ps_update_stack(t_ps *ps, int stacksize)
 	t_stack	*tmp;
 
 	tmp = ps->a;
+	ps_flagzero(ps);
 	ps_update_distance(ps);
 	ps_update_priority(ps, stacksize);
 	ps_update_total(ps);
