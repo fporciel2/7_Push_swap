@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_intelsort.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 10:13:00 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/17 09:50:43 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/17 09:52:10 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,45 +37,8 @@
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	ps_intelsort(t_ps *ps)
 {
-	static t_ps	ps;
-	t_stack		*tmp;
-
-	if (argc == 1)
-		ps_error(&ps);
-	argv++;
-	argc--;
-	ps_stack_generator(argv, &ps);
-	ps_check_correct_position(&ps);
-	tmp = ps.a;
-	ft_printf("\n");
-	while (tmp != NULL)
-	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
-	ft_printf("\n");
-	ps.i = argc;
-	ps.nummoves = 0;
-	if (ps.i <= 4)
-		ps_microsort(&ps);
-	if (ps.i <= 10)
-		ps_mechanical_sort(&ps);
-	if (ps.i > 10)
-	{
-		ps_update_stack(&ps, argc);
-		ps_intelsort(&ps);
-	}
-	tmp = ps.a;
-	ft_printf("\n");
-	while (tmp != NULL)
-	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
-	ft_printf("\n");
-	ft_printf("\nMoves: %d\n", ps.nummoves);
-	ps_success(&ps);
-	return (1);
+	(void)ps;
+	return ;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_update_stack.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 10:13:00 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/17 09:48:49 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/17 10:40:02 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,45 +37,90 @@
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+static void	ps_update_total(t_ps *ps)
 {
-	static t_ps	ps;
-	t_stack		*tmp;
+	t_stack	*tmp;
 
-	if (argc == 1)
-		ps_error(&ps);
-	argv++;
-	argc--;
-	ps_stack_generator(argv, &ps);
-	ps_check_correct_position(&ps);
-	tmp = ps.a;
-	ft_printf("\n");
+	tmp = ps->a;
 	while (tmp != NULL)
 	{
-		ft_printf("%d\n", tmp->value);
+		tmp->total = tmp->distance + tmp->priority + tmp->position;
 		tmp = tmp->next;
 	}
-	ft_printf("\n");
-	ps.i = argc;
-	ps.nummoves = 0;
-	if (ps.i <= 4)
-		ps_microsort(&ps);
-	if (ps.i <= 10)
-		ps_mechanical_sort(&ps);
-	if (ps.i > 10)
-	{
-		ps_update_stack(&ps, argc);
-		ps_intelsort(&ps);
-	}
-	tmp = ps.a;
-	ft_printf("\n");
+}
+
+static void	ps_flagzero(t_ps *ps)
+{
+	t_stack	*tmp;
+
+	tmp = ps->a;
 	while (tmp != NULL)
 	{
-		ft_printf("%d\n", tmp->value);
+		tmp->priority_flag = 0;
 		tmp = tmp->next;
 	}
-	ft_printf("\n");
-	ft_printf("\nMoves: %d\n", ps.nummoves);
-	ps_success(&ps);
-	return (1);
+}
+
+static void	ps_update_priority(t_ps *ps, int stacksize)
+{
+	t_stack		*tmp;
+	t_stack		*to_prioritize;
+	long long	priority;
+	size_t		count;
+
+	priority = 1;
+	count = 0;
+	ps_flagzero(ps);
+	while (stacksize > 0)
+	{
+		tmp = ps->a;
+		while (tmp != NULL)
+		{
+			if ((count == 0)
+					|| ((tmp->correct_position > to_prioritize->correct_position)
+						&& (tmp->priority_flag == 0)))
+				to_prioritize = tmp;
+			tmp = tmp->next;
+		}
+		to_prioritize->priority = priority;
+		to_prioritize->priority_flag = 1;
+		stacksize--;
+		priority++;
+	}
+}
+
+static void	ps_update_distance(t_ps *ps)
+{
+	t_stack	*tmp;
+
+	tmp = ps->a;
+	while (tmp != NULL)
+	{
+		if (tmp->correct_position > tmp->position)
+			tmp->distance = tmp->correct_position - tmp->position;
+		else if (tmp->position > tmp->correct_position)
+			tmp->distance = tmp->position - tmp->correct_position;
+		else
+			tmp->distance = 0;
+		tmp = tmp->next;
+	}
+}
+
+void	ps_update_stack(t_ps *ps, int stacksize)
+{
+	t_stack	*tmp;
+
+	tmp = ps->a;
+	ps_update_distance(ps);
+	ps_update_priority(ps, stacksize);
+	ps_update_total(ps);
+	ft_printf("\n\n");
+	while (tmp != NULL)
+	{
+		ft_printf("%d: p=%d, cp=%d, d=%d, pr=%d, t=%d\n",
+				tmp->value, tmp->position, tmp->correct_position,
+				tmp->distance, tmp->priority, tmp->total);
+		tmp = tmp->next;
+	}
+	ft_printf("\n\n");
 }
