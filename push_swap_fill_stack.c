@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:18:15 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 13:23:45 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:52:45 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,7 +37,74 @@
 
 #include "push_swap.h"
 
+static t_stack	*ps_select_greater(t_stack *head)
+{
+	t_stack	*to_push;
+	size_t	position;
+
+	to_push = head;
+	position = 0;
+	while (head != NULL)
+	{
+		head->position = position;
+		if (head->value > to_push->value)
+			to_push = head;
+		position++;
+		head = head->next;
+	}
+	return (to_push);
+}
+
+static t_stack	*ps_last_elem(t_ps *ps)
+{
+	t_stack	*last;
+
+	last = ps->b;
+	while (last->next != NULL)
+		last = last->next;
+	return (last);
+}
+
+static void	ps_new_set(t_ps *ps, t_stack *to_push)
+{
+	int	stacksize;
+	int	fromwhere;
+
+	stacksize = ps_stacksize(ps->b);
+	if ((int)(to_push->position) <= (stacksize / 2))
+		fromwhere = 0;
+	else
+		fromwhere = 1;
+	while (ps->b != to_push)
+	{
+		if (fromwhere == 0)
+			ps_rotate_b(ps);
+		else
+			ps_revrotate_b(ps);
+	}
+	ps_push_in_a(ps);
+}
+
 void	ps_fill_stack(t_ps *ps)
 {
-	while (
+	t_stack	*to_push;
+
+	while (ps->b)
+	{
+		to_push = ps_select_greater(ps->b);
+		if (ps->b == to_push)
+			ps_push_in_a(ps);
+		else if (ps->b->next == to_push)
+		{
+			ps_swap_b(ps);
+			ps_push_in_a(ps);
+		}
+		else if (ps_last_elem(ps) == to_push)
+		{
+			ps_revrotate_b(ps);
+			ps_push_in_a(ps);
+		}
+		else
+			ps_new_set(ps, to_push);
+	}
 }

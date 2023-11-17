@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:50:43 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 13:16:51 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:59:04 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -52,7 +52,7 @@ static void	ps_label(t_ps *ps)
 	}
 }
 
-/*static void	ps_adjust_stacks(t_ps *ps)
+static void	ps_adjust_stacks(t_ps *ps)
 {
 	if (((ps->a) && (ps->a->next) && (ps->a->value > ps->a->next->value))
 			&& ((ps->b) && (ps->b->next) && (ps->b->value < ps->b->next->value)))
@@ -62,11 +62,9 @@ static void	ps_label(t_ps *ps)
 	else if ((ps->b) && (ps->b->next) && (ps->b->value < ps->b->next->value))
 		ps_swap_b(ps);
 }
-*/
+
 void	ps_intelsort(t_ps *ps)
 {
-	int		fromwhere;
-
 	while (ps->a)
 	{
 		ps_adjust_stacks(ps);
