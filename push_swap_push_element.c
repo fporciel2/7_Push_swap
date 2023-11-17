@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_update_stack.c                           :+:      :+:    :+:   */
+/*   push_swap_push_element.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 09:48:49 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 12:04:57 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/17 11:18:55 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/17 12:04:16 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,78 +37,79 @@
 
 #include "push_swap.h"
 
-static void	ps_update_total(t_ps *ps)
+static t_stack	*ps_check_element(t_stack *head)
+{
+	t_stack	*to_push;
+
+	to_push = head;
+	while (head != NULL)
+	{
+		if (head->total < to_push->total)
+			to_push = head;
+		head = head->next;
+	}
+	return (to_push);
+}
+
+static int	ps_fromwhere(t_stack *to_push, int stacksize)
+{
+	if ((int)(to_push->position) <= (stacksize / 2))
+		return (0);
+	else
+		return (1);
+}
+
+static void	ps_byrotation(t_ps *ps)
 {
 	t_stack	*tmp;
 
-	tmp = ps->a;
-	while (tmp != NULL)
+	tmp = ps->b;
+	if (ps->b && ps->b->next)
 	{
-		tmp->total = tmp->distance + tmp->priority + tmp->position;
-		tmp = tmp->next;
-	}
-}
-
-static void	ps_flagzero(t_ps *ps)
-{
-	t_stack	*tmp;
-
-	tmp = ps->a;
-	while (tmp != NULL)
-	{
-		tmp->priority_flag = 0;
-		tmp = tmp->next;
-	}
-}
-
-static void	ps_update_priority(t_ps *ps, int stacksize)
-{
-	t_stack		*tmp;
-	t_stack		*to_prioritize;
-	long long	priority;
-
-	priority = stacksize;
-	while (stacksize > 0)
-	{
-		priority--;
-		tmp = ps->a;
-		while (tmp->priority_flag == 1)
+		while (tmp->next != NULL)
 			tmp = tmp->next;
-		if (tmp)
-			to_prioritize = tmp;
-		while (tmp != NULL)
+		if (ps->b->value < tmp->value)
 		{
-			if ((tmp->value > to_prioritize->value) && (tmp->priority_flag == 0))
-				to_prioritize = tmp;
-			tmp = tmp->next;
+			ps_rotate_r(ps);
+			return ;
 		}
-		to_prioritize->priority = priority;
-		to_prioritize->priority_flag = 1;
-		stacksize--;
 	}
+	ps_rotate_a(ps);
 }
 
-static void	ps_update_distance(t_ps *ps)
+static void	ps_byreverse(t_ps *ps)
 {
 	t_stack	*tmp;
 
-	tmp = ps->a;
-	while (tmp != NULL)
+	tmp = ps->b;
+	if (ps->b && ps->b->next)
 	{
-		if (tmp->correct_position > tmp->position)
-			tmp->distance = tmp->correct_position - tmp->position;
-		else if (tmp->position > tmp->correct_position)
-			tmp->distance = tmp->position - tmp->correct_position;
-		else
-			tmp->distance = 0;
-		tmp = tmp->next;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		if (ps->b->value < tmp->value)
+		{
+			ps_revrotate_r(ps);
+			return ;
+		}
 	}
+	ps_revrotate_a(ps);
 }
 
-void	ps_update_stack(t_ps *ps, int stacksize)
+void	ps_push_element(t_ps *ps)
 {
-	ps_flagzero(ps);
-	ps_update_distance(ps);
-	ps_update_priority(ps, stacksize);
-	ps_update_total(ps);
+	t_stack	*to_push;
+	int		stacksize;
+	int		fromwhere;
+
+	to_push = ps_check_element(ps->a);
+	stacksize = ps_stacksize(ps->a);
+	fromwhere = ps_fromwhere(to_push, stacksize);
+	while (ps->a != to_push)
+	{
+		if (fromwhere == 0)
+			ps_byrotation(ps);
+		else
+			ps_byreverse(ps);
+	}
+	ps_push_in_b(ps);
 }

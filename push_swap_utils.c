@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:00:18 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/16 12:04:11 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:05:53 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,16 +37,15 @@
 
 #include "push_swap.h"
 
-int	ps_issorted_k(t_ps *ps)
+int	ps_stacksize(t_stack *head)
 {
-	t_stack	*tmp;
+	int	result;
 
-	tmp = ps->k;
-	while (tmp != NULL)
+	result = 0;
+	while (head != NULL)
 	{
-		if (tmp->next && (tmp->value > tmp->next->value))
-			return (0);
-		tmp = tmp->next;
+		head = head->next;
+		result++;
 	}
-	return (1);
+	return (result);
 }

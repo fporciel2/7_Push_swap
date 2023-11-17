@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:50:43 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 09:52:10 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:02:05 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,8 +37,34 @@
 
 #include "push_swap.h"
 
+static void	ps_adjust_stacks(t_ps *ps)
+{
+	if (((ps->a) && (ps->a->next) && (ps->a->value > ps->a->next->value))
+			&& ((ps->b) && (ps->b->next) && (ps->b->value < ps->b->next->value)))
+		ps_swap_s(ps);
+	else if ((ps->a) && (ps->a->next) && (ps->a->value > ps->a->next->value))
+		ps_swap_a(ps);
+	else if ((ps->b) && (ps->b->next) && (ps->b->value < ps->b->next->value))
+		ps_swap_b(ps);
+}
+
 void	ps_intelsort(t_ps *ps)
 {
-	(void)ps;
-	return ;
+	t_stack	*tmp;
+
+	while (ps->a)
+	{
+		ps_adjust_stacks(ps);
+		ps_check_correct_position(ps);
+		ps_update_stack(ps, ps_stacksize(ps->a));
+		ps_push_element(ps);
+	}
+	tmp = ps->b;
+	ft_printf("\n\nB\n\n");
+	while (tmp != NULL)
+	{
+		ft_printf("%d\n", tmp->value);
+		tmp = tmp->next;
+	}
+	ft_printf("\n\n");
 }
