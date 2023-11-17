@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   push_swap_set_b.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 12:00:18 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 14:56:45 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/17 14:12:14 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/17 15:00:29 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,29 +37,66 @@
 
 #include "push_swap.h"
 
-int	ps_issorted_b(t_ps *ps)
+static int	ps_count_elements(int value, t_stack *head)
 {
-	t_stack	*b;
+	ssize_t	bigger;
 
-	b = ps->b;
-	while (b)
-	{
-		if (b->next && (b->value < b->next->value))
-			return (0);
-		b = b->next;
-	}
-	return (1);
-}
-
-int	ps_stacksize(t_stack *head)
-{
-	int	result;
-
-	result = 0;
+	bigger = -1;
 	while (head != NULL)
 	{
+		if (head->value > value)
+			bigger++;
 		head = head->next;
-		result++;
 	}
-	return (result);
+	return (bigger + 1);
+}
+
+static void	ps_correct_posit(t_ps *ps)
+{
+	ps->tmp = ps->b;
+	while (ps->tmp != NULL)
+	{
+		ps->tmp->correct_position = ps_count_elements(ps->tmp->value, ps->b);
+		ps->tmp = ps->tmp->next;
+	}
+}
+
+static void	ps_positioning(t_ps *ps)
+{
+	t_stack	*tmp;
+	int		position;
+
+	tmp = ps->b;
+	position = 0;
+	while (tmp != NULL)
+	{
+		tmp->position = position;
+		position++;
+		tmp = tmp->next;
+	}
+}
+
+void	ps_set_b(t_ps *ps)
+{
+	t_stack	*top;
+	int		stacksize;
+	int		fromwhere;
+
+	top = ps->b;
+	stacksize = ps_stacksize(ps->b);
+	top->position = 0;
+	ps_correct_posit(ps);
+	if ((int)(top->correct_position) <= (stacksize / 2))
+		fromwhere = 1;
+	else
+		fromwhere = 0;
+	ps_positioning(ps);
+	while (top->position != top->correct_position)
+	{
+		if (fromwhere == 1)
+			ps_revrotate_b(ps);
+		else
+			ps_rotate_b(ps);
+		ps_positioning(ps);
+	}
 }

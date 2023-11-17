@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:18:15 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 13:52:45 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 15:14:12 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,74 +37,61 @@
 
 #include "push_swap.h"
 
-static t_stack	*ps_select_greater(t_stack *head)
+static t_stack	*ps_set_top(t_ps *ps)
 {
-	t_stack	*to_push;
-	size_t	position;
+	t_stack	*tmp;
+	t_stack	*top;
 
-	to_push = head;
-	position = 0;
-	while (head != NULL)
+	tmp = ps->b;
+	top = tmp;
+	while (tmp != NULL)
 	{
-		head->position = position;
-		if (head->value > to_push->value)
-			to_push = head;
-		position++;
-		head = head->next;
+		if (tmp->value > top->value)
+			top = tmp;
+		tmp = tmp->next;
 	}
-	return (to_push);
+	return (top);
 }
 
-static t_stack	*ps_last_elem(t_ps *ps)
+static int	ps_set_fromwhere(t_ps *ps, t_stack *top)
 {
-	t_stack	*last;
-
-	last = ps->b;
-	while (last->next != NULL)
-		last = last->next;
-	return (last);
-}
-
-static void	ps_new_set(t_ps *ps, t_stack *to_push)
-{
-	int	stacksize;
-	int	fromwhere;
+	int		stacksize;
+	int		count;
+	t_stack	*tmp;
 
 	stacksize = ps_stacksize(ps->b);
-	if ((int)(to_push->position) <= (stacksize / 2))
-		fromwhere = 0;
-	else
-		fromwhere = 1;
-	while (ps->b != to_push)
+	count = 0;
+	tmp = ps->b;
+	while (tmp != top)
 	{
-		if (fromwhere == 0)
+		count++;
+		tmp = tmp->next;
+	}
+	if (count <= (stacksize / 2))
+		return (0);
+	return (1);
+}
+
+static void	ps_set_stack_b(t_ps *ps, t_stack *top, int fromwhere)
+{
+	if (fromwhere == 0)
+	{
+		while (ps->b != top)
 			ps_rotate_b(ps);
-		else
+	}
+	else
+	{
+		while (ps->b != top)
 			ps_revrotate_b(ps);
 	}
-	ps_push_in_a(ps);
 }
 
 void	ps_fill_stack(t_ps *ps)
 {
-	t_stack	*to_push;
+	t_stack	*top;
 
+	top = ps_set_top(ps);
+	ps_set_stack_b(ps, top, ps_set_fromwhere(ps, top));
 	while (ps->b)
-	{
-		to_push = ps_select_greater(ps->b);
-		if (ps->b == to_push)
-			ps_push_in_a(ps);
-		else if (ps->b->next == to_push)
-		{
-			ps_swap_b(ps);
-			ps_push_in_a(ps);
-		}
-		else if (ps_last_elem(ps) == to_push)
-		{
-			ps_revrotate_b(ps);
-			ps_push_in_a(ps);
-		}
-		else
-			ps_new_set(ps, to_push);
-	}
+		ps_push_in_a(ps);
 }

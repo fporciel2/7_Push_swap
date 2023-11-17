@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:41:31 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 13:18:02 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:52:26 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -136,5 +136,7 @@ void	ps_intelsort(t_ps *ps);
 int		ps_stacksize(t_stack *head);
 void	ps_push_element(t_ps *ps);
 void	ps_fill_stack(t_ps *ps);
+void	ps_set_b(t_ps *ps);
+int		ps_issorted_b(t_ps *ps);
 
 #endif

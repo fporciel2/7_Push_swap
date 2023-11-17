@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:18:55 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 14:04:44 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:36:43 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -59,7 +59,7 @@ static int	ps_fromwhere(t_stack *to_push, int stacksize)
 		return (1);
 }
 
-static void	ps_byrotation(t_ps *ps)
+/*static void	ps_byrotation(t_ps *ps)
 {
 	t_stack	*tmp;
 
@@ -94,7 +94,7 @@ static void	ps_byreverse(t_ps *ps)
 	}
 	ps_revrotate_a(ps);
 }
-
+*/
 void	ps_push_element(t_ps *ps)
 {
 	t_stack	*to_push;
@@ -107,9 +107,9 @@ void	ps_push_element(t_ps *ps)
 	while (ps->a != to_push)
 	{
 		if (fromwhere == 0)
-			ps_byrotation(ps);
+			ps_rotate_a(ps);
 		else
-			ps_byreverse(ps);
+			ps_revrotate_a(ps);
 	}
 	ps_push_in_b(ps);
 }
