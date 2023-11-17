@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:12:14 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 15:00:29 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 15:41:13 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,66 +37,25 @@
 
 #include "push_swap.h"
 
-static int	ps_count_elements(int value, t_stack *head)
-{
-	ssize_t	bigger;
-
-	bigger = -1;
-	while (head != NULL)
-	{
-		if (head->value > value)
-			bigger++;
-		head = head->next;
-	}
-	return (bigger + 1);
-}
-
-static void	ps_correct_posit(t_ps *ps)
-{
-	ps->tmp = ps->b;
-	while (ps->tmp != NULL)
-	{
-		ps->tmp->correct_position = ps_count_elements(ps->tmp->value, ps->b);
-		ps->tmp = ps->tmp->next;
-	}
-}
-
-static void	ps_positioning(t_ps *ps)
-{
-	t_stack	*tmp;
-	int		position;
-
-	tmp = ps->b;
-	position = 0;
-	while (tmp != NULL)
-	{
-		tmp->position = position;
-		position++;
-		tmp = tmp->next;
-	}
-}
-
 void	ps_set_b(t_ps *ps)
 {
-	t_stack	*top;
+	t_stack	*tmp;
+	int		count;
 	int		stacksize;
-	int		fromwhere;
 
-	top = ps->b;
+	ps_positioning_b(ps);
 	stacksize = ps_stacksize(ps->b);
-	top->position = 0;
-	ps_correct_posit(ps);
-	if ((int)(top->correct_position) <= (stacksize / 2))
-		fromwhere = 1;
-	else
-		fromwhere = 0;
-	ps_positioning(ps);
-	while (top->position != top->correct_position)
+	count = 0;
+	ps_create_k(ps);
+	while (count != stacksize)
 	{
-		if (fromwhere == 1)
-			ps_revrotate_b(ps);
-		else
-			ps_rotate_b(ps);
-		ps_positioning(ps);
+		tmp = ps_assign_right_k(ps);
+		while (tmp->position != tmp->correct_position)
+		{
+			ps_demisorting(tmp, ps->b, stacksize);
+			ps_positioning_b(ps);
+		}
+		count++;
 	}
+	ps_destroy_k(ps);
 }
