@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:50:43 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 12:02:05 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:49:04 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,7 +37,22 @@
 
 #include "push_swap.h"
 
-static void	ps_adjust_stacks(t_ps *ps)
+static void	ps_label(t_ps *ps)
+{
+	t_stack	*tmp;
+	ssize_t	position;
+
+	tmp = ps->a;
+	position = 0;
+	while (tmp != NULL)
+	{
+		tmp->position = position;
+		position++;
+		tmp = tmp->next;
+	}
+}
+
+/*static void	ps_adjust_stacks(t_ps *ps)
 {
 	if (((ps->a) && (ps->a->next) && (ps->a->value > ps->a->next->value))
 			&& ((ps->b) && (ps->b->next) && (ps->b->value < ps->b->next->value)))
@@ -46,7 +61,7 @@ static void	ps_adjust_stacks(t_ps *ps)
 		ps_swap_a(ps);
 	else if ((ps->b) && (ps->b->next) && (ps->b->value < ps->b->next->value))
 		ps_swap_b(ps);
-}
+}*/
 
 void	ps_intelsort(t_ps *ps)
 {
@@ -54,7 +69,8 @@ void	ps_intelsort(t_ps *ps)
 
 	while (ps->a)
 	{
-		ps_adjust_stacks(ps);
+		//ps_adjust_stacks(ps);
+		ps_label(ps);
 		ps_check_correct_position(ps);
 		ps_update_stack(ps, ps_stacksize(ps->a));
 		ps_push_element(ps);
