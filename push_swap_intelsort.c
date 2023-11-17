@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:50:43 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 12:49:04 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:16:51 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -61,26 +61,19 @@ static void	ps_label(t_ps *ps)
 		ps_swap_a(ps);
 	else if ((ps->b) && (ps->b->next) && (ps->b->value < ps->b->next->value))
 		ps_swap_b(ps);
-}*/
-
+}
+*/
 void	ps_intelsort(t_ps *ps)
 {
-	t_stack	*tmp;
+	int		fromwhere;
 
 	while (ps->a)
 	{
-		//ps_adjust_stacks(ps);
+		ps_adjust_stacks(ps);
 		ps_label(ps);
 		ps_check_correct_position(ps);
 		ps_update_stack(ps, ps_stacksize(ps->a));
 		ps_push_element(ps);
 	}
-	tmp = ps->b;
-	ft_printf("\n\nB\n\n");
-	while (tmp != NULL)
-	{
-		ft_printf("%d\n", tmp->value);
-		tmp = tmp->next;
-	}
-	ft_printf("\n\n");
+	ps_fill_stack(ps);
 }
