@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:12:14 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 15:41:13 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/18 06:57:39 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -37,25 +37,65 @@
 
 #include "push_swap.h"
 
-void	ps_set_b(t_ps *ps)
+static t_stack	*ps_set_top(t_ps *ps, t_stack *tp)
 {
 	t_stack	*tmp;
-	int		count;
-	int		stacksize;
+	t_stack	*top;
 
-	ps_positioning_b(ps);
+	tmp = ps->b;
+	while (tmp && (tmp->value > tp->value))
+		tmp = tmp->next;
+	if (tmp == NULL)
+		return (NULL);
+	top = tmp;
+	while (tmp != NULL)
+	{
+		if ((tmp->value < tp->value) && (tmp->value > top->value))
+			top = tmp;
+		tmp = tmp->next;
+	}
+	return (top);
+}
+
+static int	ps_set_fromwhere(t_ps *ps, t_stack *top)
+{
+	int		stacksize;
+	int		count;
+	t_stack	*tmp;
+
 	stacksize = ps_stacksize(ps->b);
 	count = 0;
-	ps_create_k(ps);
-	while (count != stacksize)
+	tmp = ps->b;
+	while (tmp != top)
 	{
-		tmp = ps_assign_right_k(ps);
-		while (tmp->position != tmp->correct_position)
-		{
-			ps_demisorting(tmp, ps->b, stacksize);
-			ps_positioning_b(ps);
-		}
 		count++;
+		tmp = tmp->next;
 	}
-	ps_destroy_k(ps);
+	if (count <= (stacksize / 2))
+		return (0);
+	return (1);
+}
+
+static void	ps_set_stack_b(t_ps *ps, t_stack *top, int fromwhere)
+{
+	if (top == NULL)
+		return ;
+	if (fromwhere == 0)
+	{
+		while (ps->b != top)
+			ps_rotate_b(ps);
+	}
+	else
+	{
+		while (ps->b != top)
+			ps_revrotate_b(ps);
+	}
+}
+
+void	ps_set_b(t_ps *ps, t_stack *tp)
+{
+	t_stack	*top;
+
+	top = ps_set_top(ps, tp);
+	ps_set_stack_b(ps, top, ps_set_fromwhere(ps, top));
 }

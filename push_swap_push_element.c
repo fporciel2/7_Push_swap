@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:18:55 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 14:36:43 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/18 06:12:56 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -102,6 +102,7 @@ void	ps_push_element(t_ps *ps)
 	int		fromwhere;
 
 	to_push = ps_check_element(ps->a);
+	ps_set_b(ps, to_push);
 	stacksize = ps_stacksize(ps->a);
 	fromwhere = ps_fromwhere(to_push, stacksize);
 	while (ps->a != to_push)

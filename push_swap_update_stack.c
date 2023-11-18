@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:48:49 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 12:04:57 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/18 07:06:43 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -78,7 +78,8 @@ static void	ps_update_priority(t_ps *ps, int stacksize)
 			to_prioritize = tmp;
 		while (tmp != NULL)
 		{
-			if ((tmp->value > to_prioritize->value) && (tmp->priority_flag == 0))
+			if ((tmp->value > to_prioritize->value)
+				&& (tmp->priority_flag == 0))
 				to_prioritize = tmp;
 			tmp = tmp->next;
 		}

@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 13:18:15 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/17 15:14:12 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/18 06:33:04 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -90,8 +90,10 @@ void	ps_fill_stack(t_ps *ps)
 {
 	t_stack	*top;
 
-	top = ps_set_top(ps);
-	ps_set_stack_b(ps, top, ps_set_fromwhere(ps, top));
 	while (ps->b)
+	{
+		top = ps_set_top(ps);
+		ps_set_stack_b(ps, top, ps_set_fromwhere(ps, top));
 		ps_push_in_a(ps);
+	}
 }
