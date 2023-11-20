@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:46:22 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/20 13:26:50 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:29:16 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -129,10 +129,10 @@ int	main(int argc, char **argv)
 		ps_error(&ps);
 	argv++;
 	argc--;
-	ps_stack_generator(argv, &ps);
+	psc_stack_generator(argv, &ps);
 	ps_check_correct_position(&ps);
 	psc_continue_checker(&ps);
 	psc_check_order(&ps, argc);
-	ps_success(&ps);
+	psc_success(&ps);
 	return (1);
 }

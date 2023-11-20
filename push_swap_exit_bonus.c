@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   push_swap_exit_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 13:21:35 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/20 14:28:45 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/20 14:20:52 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/20 14:23:34 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -35,12 +35,17 @@
 *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef CHECKER_H
-# define CHECKER_H
-# include "./push_swap.h"
-# include <errno.h>
+#include "checker.h"
 
-void	psc_success(t_ps *ps);
-void	psc_stack_generator(char **argv, t_ps *ps);
-
-#endif
+void	psc_success(t_ps *ps)
+{
+	if ((ps->a == NULL) && (ps->b == NULL))
+		exit(EXIT_SUCCESS);
+	if (ps->a != NULL)
+		ps_clean(ps->a);
+	if (ps->b != NULL)
+		ps_clean(ps->b);
+	if (ps->k != NULL)
+		ps_clean(ps->k);
+	exit((int)write(1, "OK\n", 3));
+}
