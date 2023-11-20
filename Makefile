@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/20 13:12:19 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/20 13:46:43 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -36,7 +36,7 @@
 #
 
 .PHONY: all bonus clean fclean re rebonus norm dft ft dprintf printf \
-	autogit memcheck dfclean
+	autogit memcheck dfclean both
 .DEFAULT_GOAL: all
 DIR := $(shell pwd)
 FTDIR := $(DIR)/1_libft
@@ -59,15 +59,15 @@ INCLUDE := $(addprefix -I, $(DIR) $(FTDIR) $(PRINTFDIR))
 LIBS := $(addprefix -L, $(FTDIR) $(PRINTFDIR))
 LFLAGS := -lft -lftprintf
 
-all: $(NAME)
+all: $(FT) $(PRINTF) $(NAME)
 
-$(NAME): $(FT) $(PRINTF) $(OBJS)
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBS) $(LFLAGS) -o $(NAME)
 
-bonus: $(BNAME)
+bonus: $(FT) $(PRINTF) $(BNAME)
 
-$(BNAME): $(FT) $(PRINTF) $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDE) $(BOBJS) $(LIBS) $(LFLAGS) -o $(NAME)
+$(BNAME): $(BOBJS)
+	$(CC) $(CFLAGS) $(INCLUDE) $(BOBJS) $(LIBS) $(LFLAGS) -o $(BNAME)
 
 ft: $(FT)
 
@@ -92,12 +92,19 @@ dprintf:
 $(OBJS): $(FT) $(PRINTF) $(SRCS)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $(SRCS)
 
-$(BSRCS): $(FT) $(PRINTF) $(BSRCS)
+$(BOBJS): $(FT) $(PRINTF) $(BSRCS)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $(BSRCS)
 
 norm:
 	@norminette $(SRCS) $(BSRCS) $(PSH) $(BPSH) $(FTH) $(PRINTFH) \
 		$(FTDIR)/*.c $(PRINTFDIR)/*.c
+
+both:
+	@make dfclean
+	@make
+	@make clean
+	@rm -f $(FT) $(PRINTF)
+	@make bonus
 
 clean:
 	@rm -f $(OBJS)
