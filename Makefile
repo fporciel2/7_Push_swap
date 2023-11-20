@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/16 10:32:07 by fporciel         ###   ########.fr        #
+#    Updated: 2023/11/20 13:12:19 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -46,7 +46,7 @@ PRINTF := $(PRINTFDIR)/libftprintf.a
 NAME := $(DIR)/push_swap
 BNAME := $(DIR)/checker
 SRCS := $(filter-out %bonus.c, $(wildcard push_swap*.c))
-BSRCS := $(wildcard push_swap*bonus.c)
+BSRCS := $(filter-out push_swap.c, $(wildcard push_swap*.c))
 OBJS := $(patsubst %.c, %.o, $(SRCS))
 BOBJS := $(patsubst %.c, %.o, $(BSRCS))
 PSH := $(DIR)/push_swap.h

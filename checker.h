@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/20 11:41:46 by fporciel         ###   ########.fr       */
+/*   Created: 2023/11/20 13:21:35 by fporciel          #+#    #+#             */
+/*   Updated: 2023/11/20 13:24:55 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -35,26 +35,9 @@
 *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "push_swap.h"
+#ifndef CHECKER_H
+# define CHECKER_H
+# include "./push_swap.h"
+# include <errno.h>
 
-int	main(int argc, char **argv)
-{
-	static t_ps	ps;
-
-	if (argc == 1)
-		ps_error(&ps);
-	argv++;
-	argc--;
-	ps_stack_generator(argv, &ps);
-	ps_check_correct_position(&ps);
-	ps.i = argc;
-	ps.nummoves = 0;
-	if (ps.i <= 4)
-		ps_microsort(&ps);
-	if (ps.i <= 10)
-		ps_mechanical_sort(&ps);
-	if (ps.i > 10)
-		ps_intelsort(&ps);
-	ps_success(&ps);
-	return (1);
-}
+#endif
