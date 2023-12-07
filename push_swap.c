@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:25:30 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/20 11:41:46 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:10:30 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	static t_ps	ps;
 
 	if (argc == 1)
-		ps_error(&ps);
+		ps_success(&ps);
 	argv++;
 	argc--;
 	ps_stack_generator(argv, &ps);
