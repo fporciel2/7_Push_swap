@@ -6,7 +6,7 @@
 #    By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:26:54 by fporciel          #+#    #+#              #
-#    Updated: 2023/11/20 14:24:51 by fporciel         ###   ########.fr        #
+#    Updated: 2023/12/07 10:27:08 by fporciel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # 
@@ -57,7 +57,7 @@ CC := gcc
 CFLAGS := -std=c17 -pedantic -Wall -Wextra -Werror -O3 -march=native -g
 INCLUDE := $(addprefix -I, $(DIR) $(FTDIR) $(PRINTFDIR))
 LIBS := $(addprefix -L, $(FTDIR) $(PRINTFDIR))
-LFLAGS := -lft -lftprintf
+LFLAGS := -lc -lft -lftprintf
 
 all: $(FT) $(PRINTF) $(NAME)
 
@@ -77,7 +77,7 @@ $(FT): dft
 
 dft:
 	@if [ ! -e $(FTDIR) ]; \
-		then git clone git@github.com:fporciel2/1_libft; fi
+		then git clone https://github.com/fporciel2/1_libft.git; fi
 
 printf: $(PRINTF)
 
@@ -87,7 +87,7 @@ $(PRINTF): dprintf
 
 dprintf:
 	@if [ ! -e $(PRINTFDIR) ]; \
-		then git clone git@github.com:fporciel2/2_ft_printf; fi
+		then git clone https://github.com/fporciel2/2_ft_printf.git; fi
 
 $(OBJS): $(FT) $(PRINTF) $(SRCS)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $(SRCS)

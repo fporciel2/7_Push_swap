@@ -6,7 +6,7 @@
 /*   By: fporciel <fporciel@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:20:52 by fporciel          #+#    #+#             */
-/*   Updated: 2023/11/20 14:23:34 by fporciel         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:37:37 by fporciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*   
@@ -47,5 +47,5 @@ void	psc_success(t_ps *ps)
 		ps_clean(ps->b);
 	if (ps->k != NULL)
 		ps_clean(ps->k);
-	exit((int)write(1, "OK\n", 3));
+	exit(EXIT_SUCCESS);
 }
